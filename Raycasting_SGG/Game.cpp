@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <string>
 
 Game::Game()
 	:
@@ -75,5 +76,13 @@ void Game::Draw()
 	br.outline_opacity = 1.0f;
 	graphics::drawLine(scene.player.Position().x * 6 + 3, scene.player.Position().y * 6 + 3,
 		               v.x * 6 + 3, v.y * 6 + 3, br);
+
+	//FPS counter
+	br.fill_color[0] = 1.0;
+	br.fill_color[1] = 1.0;
+	br.fill_color[2] = 1.0f;
+
+	float frameTime = graphics::getDeltaTime() / 1000.0; //frameTime is the time this frame has taken, in seconds
+	graphics::drawText(scene.level.GetWidth() * 6 + 3, 50, 50, std::to_string(int(1.0 / frameTime)), br);
 
 }

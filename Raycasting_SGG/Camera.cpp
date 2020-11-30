@@ -146,9 +146,9 @@ void Camera::RenderSceneAt(int x, int y, int width, int height) const
         float endY = float(drawEnd + y);
         if (endY > height) endY = height;
 
-        graphics::drawLine(column + x, y, column + x, startY, sky);
+        //graphics::drawLine(column + x, y, column + x, startY, sky);
         graphics::drawLine(column + x, startY, column + x, endY, br);
-        graphics::drawLine(column + x, endY, column + x, height + y, floor);
+        //graphics::drawLine(column + x, endY, column + x, height + y, floor);
 	}
 
 }
