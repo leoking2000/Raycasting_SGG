@@ -8,10 +8,7 @@ Camera::Camera(const Scene* pScene, int width, int height)
 {
     br.outline_opacity = 1.0f;
 
-    sky.fill_color[0] = 0.28f;
-    sky.fill_color[1] = 0.5f;
-    sky.fill_color[2] = 1.75f;
-    sky.outline_opacity = 0.0f;
+    sky.texture = "assets//sky.png";
 }
 
 void Camera::setScene(const Scene* pScene_in)
@@ -117,10 +114,9 @@ void Camera::RenderSceneAt(int x, int y)
         switch (pScene->level.Get(hitPos.x, hitPos.y))
         {
         case '#':  
-            br.outline_color[0] = 1.0f;
-            br.outline_color[1] = 1.0f;
-            br.outline_color[2] = 1.0f;
-            br.texture = "assets//wall.png";
+            br.outline_color[0] = 0.2f;
+            br.outline_color[1] = 0.8f;
+            br.outline_color[2] = 0.8f;
             break;
 
         case 'R':  br.outline_color[0] = 1.0f; br.outline_color[1] = 0.0f; br.outline_color[2] = 0.0f; break;
