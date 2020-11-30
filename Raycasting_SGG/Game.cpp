@@ -6,9 +6,9 @@ Game::Game()
 	camera(&scene)
 {
 	graphics::Brush br;
-	br.fill_color[0] = 0.1f;
-	br.fill_color[1] = 0.1f;
-	br.fill_color[2] = 0.1f;
+	br.fill_color[0] = 0.0f;
+	br.fill_color[1] = 0.0f;
+	br.fill_color[2] = 0.0f;
 	graphics::setWindowBackground(br);
 	graphics::setFont("assets//orange juice 2.0.ttf");
 
@@ -32,12 +32,12 @@ void Game::Update(float dt)
 
 	if (graphics::getKeyState(graphics::SCANCODE_LEFT))
 	{
-		scene.player.RotateBy(-0.005f * dt);
+		scene.player.RotateBy(-0.002f * dt);
 	}
 
 	if (graphics::getKeyState(graphics::SCANCODE_RIGHT))
 	{
-		scene.player.RotateBy(0.005f * dt);
+		scene.player.RotateBy(0.002f * dt);
 	}
 
 }

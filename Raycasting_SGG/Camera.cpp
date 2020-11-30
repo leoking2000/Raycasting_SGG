@@ -21,6 +21,18 @@ void Camera::RenderSceneAt(int x, int y, int width, int height) const
     graphics::Brush br;
     br.outline_opacity = 1.0f;
 
+    graphics::Brush sky;
+    sky.outline_color[0] = 0.28f;
+    sky.outline_color[1] = 0.5f;
+    sky.outline_color[2] = 1.75f;
+    sky.outline_opacity = 1.0f;
+
+    graphics::Brush floor;
+    floor.outline_color[0] = 0.2f;
+    floor.outline_color[1] = 0.2f;
+    floor.outline_color[2] = 0.2f;
+    floor.outline_opacity = 1.0f;
+
 
 	for (int column = 0; column < width; column++)
 	{
@@ -119,7 +131,7 @@ void Camera::RenderSceneAt(int x, int y, int width, int height) const
                       
         case 'B':  br.outline_color[0] = 0.0f; br.outline_color[1] = 0.0f; br.outline_color[2] = 1.0f; break;
                                      
-        default:   br.outline_color[0] = 1.0f; br.outline_color[1] = 1.0f; br.outline_color[2] = 0.0f; break;
+        default:   br.outline_color[0] = 0.5f; br.outline_color[1] = 1.0f; br.outline_color[2] = 0.5f; break;
 
         }
 
@@ -130,8 +142,13 @@ void Camera::RenderSceneAt(int x, int y, int width, int height) const
             br.outline_color[2] = br.outline_color[2] / 2;
         }
 
+        float startY = float(drawStart + y);
+        float endY = float(drawEnd + y);
+        if (endY > height) endY = height;
 
-        graphics::drawLine(column + x, drawStart + y, column + x, drawEnd + y, br);
+        graphics::drawLine(column + x, y, column + x, startY, sky);
+        graphics::drawLine(column + x, startY, column + x, endY, br);
+        graphics::drawLine(column + x, endY, column + x, height + y, floor);
 	}
 
 }
