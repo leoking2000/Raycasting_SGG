@@ -14,7 +14,6 @@ void Draw()
 	game->Draw();
 }
 
-
 int main()
 {
     graphics::createWindow(Game::CanvasWidth, Game::CanvasHeight, "Game");
