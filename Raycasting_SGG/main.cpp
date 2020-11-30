@@ -18,7 +18,7 @@ void Draw()
 int main()
 {
     graphics::createWindow(Game::CanvasWidth, Game::CanvasHeight, "Game");
-	graphics::setCanvasScaleMode(graphics::CANVAS_SCALE_FIT);
+	graphics::setCanvasScaleMode(graphics::CANVAS_SCALE_WINDOW);
 	graphics::setCanvasSize((float)Game::CanvasWidth, (float)Game::CanvasHeight);
 
 	Game game;
