@@ -12,7 +12,7 @@ public:
 	Game& operator=(const Game& g) = delete;
 	///////////////Static Constexpr Data////////////////////////
 	static constexpr unsigned int CanvasWidth = 1600u;
-	static constexpr unsigned int CanvasHeight = 900u;
+	static constexpr unsigned int CanvasHeight = 900;
 	///////////////Special Functions//////////////////////
 	void Update(float dt);
 	void Draw();

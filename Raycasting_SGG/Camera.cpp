@@ -1,9 +1,17 @@
 #include "Camera.h"
 
-Camera::Camera(const Scene* pScene)
+Camera::Camera(const Scene* pScene, int width, int height)
 	:
-	pScene(pScene)
+	pScene(pScene),
+    width(width),
+    height(height)
 {
+    br.outline_opacity = 1.0f;
+
+    sky.fill_color[0] = 0.28f;
+    sky.fill_color[1] = 0.5f;
+    sky.fill_color[2] = 1.75f;
+    sky.outline_opacity = 0.0f;
 }
 
 void Camera::setScene(const Scene* pScene_in)
@@ -11,28 +19,14 @@ void Camera::setScene(const Scene* pScene_in)
 	pScene = pScene_in;
 }
 
-void Camera::RenderSceneAt(int x, int y, int width, int height) const
+void Camera::RenderSceneAt(int x, int y)
 {
 	const Vector2 player_pos = pScene->player.Position();
 	const Vector2 player_dir = pScene->player.Direction();
 
 	const Vector2 plane = { -player_dir.y, player_dir.x };
 
-    graphics::Brush br;
-    br.outline_opacity = 1.0f;
-
-    graphics::Brush sky;
-    sky.outline_color[0] = 0.28f;
-    sky.outline_color[1] = 0.5f;
-    sky.outline_color[2] = 1.75f;
-    sky.outline_opacity = 1.0f;
-
-    graphics::Brush floor;
-    floor.outline_color[0] = 0.2f;
-    floor.outline_color[1] = 0.2f;
-    floor.outline_color[2] = 0.2f;
-    floor.outline_opacity = 1.0f;
-
+    graphics::drawRect(width / 2.0f, width / 6.0f, width, width / 3.0f, sky);
 
 	for (int column = 0; column < width; column++)
 	{
@@ -116,6 +110,10 @@ void Camera::RenderSceneAt(int x, int y, int width, int height) const
         int drawEnd = lineHeight / 2 + width / 3;
         if (drawEnd >= width) drawEnd = width - 1;
 
+        float startY = float(drawStart + y);
+        float endY = float(drawEnd + y);
+        if (endY > height + y) endY = height + y;
+
         switch (pScene->level.Get(hitPos.x, hitPos.y))
         {
         case '#':  
@@ -142,13 +140,7 @@ void Camera::RenderSceneAt(int x, int y, int width, int height) const
             br.outline_color[2] = br.outline_color[2] / 2;
         }
 
-        float startY = float(drawStart + y);
-        float endY = float(drawEnd + y);
-        if (endY > height) endY = height;
-
-        //graphics::drawLine(column + x, y, column + x, startY, sky);
         graphics::drawLine(column + x, startY, column + x, endY, br);
-        //graphics::drawLine(column + x, endY, column + x, height + y, floor);
 	}
 
 }

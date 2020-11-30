@@ -3,14 +3,15 @@
 
 Game::Game()
 	:
-	scene(Player({10.0f, 1.0f}), Level()),
-	camera(&scene)
+	scene(Player({10.0f, 8.0f}), Level()),
+	camera(&scene, CanvasWidth, CanvasHeight)
 {
-	graphics::Brush br;
-	br.fill_color[0] = 0.0f;
-	br.fill_color[1] = 0.0f;
-	br.fill_color[2] = 0.0f;
-	graphics::setWindowBackground(br);
+	graphics::Brush floor;
+	floor.fill_color[0] = 0.2f;
+	floor.fill_color[1] = 0.2f;
+	floor.fill_color[2] = 0.2f;
+	floor.outline_opacity = 0.0f;
+	graphics::setWindowBackground(floor);
 	graphics::setFont("assets//orange juice 2.0.ttf");
 
 }
@@ -46,7 +47,8 @@ void Game::Update(float dt)
 void Game::Draw()
 {
 
-	camera.RenderSceneAt(0, 0, CanvasWidth, CanvasHeight);
+	//camera.RenderSceneAt(scene.level.GetWidth() * 6 + 3, 200);
+	camera.RenderSceneAt(0, 0);
 
 	/////////////minimap////////////////////////
 	graphics::Brush br;
