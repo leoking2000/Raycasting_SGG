@@ -8,7 +8,10 @@ Camera::Camera(const Scene* pScene, int width, int height)
 {
     br.outline_opacity = 1.0f;
 
-    sky.texture = "assets//sky.png";
+    sky.fill_color[0] = 0.8f;
+    sky.fill_color[1] = 0.8f;
+    sky.fill_color[2] = 1.0f;
+    sky.fill_opacity = 1.0f;
 }
 
 void Camera::setScene(const Scene* pScene_in)
