@@ -26,7 +26,7 @@ void Camera::RenderSceneAt(int x, int y)
 
 	const Vector2 plane = { -player_dir.y, player_dir.x };
 
-    graphics::drawRect(width / 2.0f, width / 6.0f, width, width / 3.0f, sky);
+    graphics::drawRect(float(width) / 2.0f, float(width) / 6.0f, float(width), float(width) / 3.0f, sky);
 
 	for (int column = 0; column < width; column++)
 	{
@@ -70,7 +70,7 @@ void Camera::RenderSceneAt(int x, int y)
             sideDist.y = ((int)player_pos.y + 1.0f - player_pos.y) * deltaDist.y;
         }
 
-        Vector2 hitPos((int)player_pos.x, (int)player_pos.y);
+        Vector2int hitPos((int)player_pos.x, (int)player_pos.y);
 
         //perform DDA
         while (!hit)
@@ -112,7 +112,7 @@ void Camera::RenderSceneAt(int x, int y)
 
         float startY = float(drawStart + y);
         float endY = float(drawEnd + y);
-        if (endY > height + y) endY = height + y;
+        if (endY > height + y) endY = float(height + y);
 
         switch (pScene->level.Get(hitPos.x, hitPos.y))
         {
@@ -139,7 +139,7 @@ void Camera::RenderSceneAt(int x, int y)
             br.outline_color[2] = br.outline_color[2] / 2;
         }
 
-        graphics::drawLine(column + x, startY, column + x, endY, br);
+        graphics::drawLine(float(column + x), startY, float(column + x), endY, br);
 	}
 
 }

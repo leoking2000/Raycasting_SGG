@@ -62,7 +62,7 @@ void Game::Draw()
 		{
 			if (scene.level.Get(x, y) != '.')
 			{
-				graphics::drawRect(x * 6 + 3, y * 6 + 3, 5, 5, br);
+				graphics::drawRect(float(x * 6 + 3), float(y * 6 + 3), 5.0f, 5.0f, br);
 			}
 		}
 	}
@@ -85,7 +85,7 @@ void Game::Draw()
 	br.fill_color[1] = 1.0;
 	br.fill_color[2] = 1.0f;
 
-	float frameTime = graphics::getDeltaTime() / 1000.0; //frameTime is the time this frame has taken, in seconds
-	graphics::drawText(scene.level.GetWidth() * 6 + 3, 50, 50, std::to_string(int(1.0 / frameTime)), br);
+	double frameTime = graphics::getDeltaTime() / 1000.0; //frameTime is the time this frame has taken, in seconds
+	graphics::drawText(float(scene.level.GetWidth() * 6 + 3), 50.0f, 50.0f, std::to_string(int(1.0 / frameTime)), br);
 
 }
