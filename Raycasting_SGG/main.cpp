@@ -2,14 +2,14 @@
 
 void Update(float dt)
 {
-	Game* game = (Game*)graphics::getUserData();
+	Game* game = reinterpret_cast<Game*>(graphics::getUserData());
 
 	game->Update(dt);
 }
 
 void Draw()
 {
-	Game* game = (Game*)graphics::getUserData();
+	Game* game = reinterpret_cast<Game*>(graphics::getUserData());
 
 	game->Draw();
 }
