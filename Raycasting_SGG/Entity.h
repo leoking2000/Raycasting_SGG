@@ -6,7 +6,7 @@
 /// An Entitie that has a position in the Level(see Level.h) and an direction in which is looking.
 /// Also is has an Item it can use.
 /// By calling the update method the entity will be simulated and show complex behavior .
-/// </summary>represents
+/// </summary>
 class Entity : public GameObject
 {
 public:
