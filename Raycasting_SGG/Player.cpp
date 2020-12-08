@@ -1,29 +1,28 @@
 #include "Player.h"
 
-Player::Player(const Vector2& pos)
-    :
-    position(pos)
-{
-}
 
-Vector2 Player::Position() const
+void Player::Update(float dt)
 {
-    return position;
-}
+	const float multiplier = dt / 1000.0f;
 
-Vector2 Player::Direction() const
-{
-    return direction;
-}
+	if (graphics::getKeyState(graphics::SCANCODE_UP))
+	{
+		GoForward(5.0f * multiplier);
+	}
 
-void Player::GoForward(float v)
-{
-	position += direction * v;
-}
+	if (graphics::getKeyState(graphics::SCANCODE_DOWN))
+	{
+		GoForward(-5.0f * multiplier);
+	}
 
-void Player::RotateBy(float rad)
-{
-	direction.Rotate(rad);
-	direction.Normalize();
+	if (graphics::getKeyState(graphics::SCANCODE_LEFT))
+	{
+		RotateBy(-2.0f * multiplier);
+	}
+
+	if (graphics::getKeyState(graphics::SCANCODE_RIGHT))
+	{
+		RotateBy(2.0f * multiplier);
+	}
 }
 

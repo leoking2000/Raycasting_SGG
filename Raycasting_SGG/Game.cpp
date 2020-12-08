@@ -3,7 +3,7 @@
 
 Game::Game()
 	:
-	scene(Player({10.0f, 8.0f}), Level()),
+	scene(Player({ 10.0f, 8.0f }, {-1.0, 0.0}), Level()),
 	camera(&scene, CanvasWidth, CanvasHeight)
 {
 	graphics::Brush background;
@@ -21,25 +21,7 @@ Game::~Game()
 
 void Game::Update(float dt)
 {
-	if (graphics::getKeyState(graphics::SCANCODE_UP))
-	{
-		scene.player.GoForward(0.005f * dt);
-	}
-
-	if (graphics::getKeyState(graphics::SCANCODE_DOWN))
-	{
-		scene.player.GoForward(-0.005f * dt);
-	}
-
-	if (graphics::getKeyState(graphics::SCANCODE_LEFT))
-	{
-		scene.player.RotateBy(-0.002f * dt);
-	}
-
-	if (graphics::getKeyState(graphics::SCANCODE_RIGHT))
-	{
-		scene.player.RotateBy(0.002f * dt);
-	}
+	scene.player.Update(dt);
 
 }
 

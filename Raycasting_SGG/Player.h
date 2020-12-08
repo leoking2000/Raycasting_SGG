@@ -1,20 +1,23 @@
 #pragma once
-#include "Vector2.h"
+#include "Entity.h"
 
-class Player
+class Player : public Entity
 {
 public:
-	Player(const Vector2& pos);
+	Player(const Vector2& pos, const Vector2& dir)
+		:
+		Entity(pos,dir)
+	{
+	}
 
-	Vector2 Position() const;
-	Vector2	Direction() const;
+	graphics::Brush getBrush() const override
+	{
+		// the player will never been drawn
 
-	void GoForward(float v);
-	void RotateBy(float rad);
+		return graphics::Brush();
+	}
 
-private:
-	Vector2 position;           // world space
-	Vector2 direction{ -1,0 };  // world space
+	void Update(float dt) override;
 
 };
 
