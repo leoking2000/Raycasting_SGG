@@ -1,9 +1,10 @@
 #include "Game.h"
 #include <string>
+#include "Enemy.h"
 
 Game::Game()
 	:
-	scene(Player({ 10.0f, 8.0f }, {-1.0, 0.0}), Level()),
+	scene(Player(10.0f, 8.0f,-1.0, 0.0), Level()),
 	camera(&scene, CanvasWidth, CanvasHeight)
 {
 	graphics::Brush background;
@@ -12,6 +13,9 @@ Game::Game()
 	background.fill_color[2] = 0.2f;
 	graphics::setWindowBackground(background);
 	graphics::setFont("assets//orange juice 2.0.ttf");
+
+
+	scene.gameobjects.push_back(new Enemy(3.0f, 8.0f, 1.0f, 0.0f));
 
 }
 

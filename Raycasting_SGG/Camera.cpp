@@ -21,12 +21,12 @@ void Camera::setScene(const Scene* pScene_in)
 
 void Camera::RenderSceneAt(int x, int y)
 {
+    // for drawing what the player sees
 	const Vector2 player_pos = pScene->player.Position();
 	const Vector2 player_dir = pScene->player.Direction();
-
 	const Vector2 plane = { -player_dir.y, player_dir.x };
 
-    graphics::drawRect(float(width) / 2.0f, float(width) / 6.0f, float(width), float(width) / 3.0f, sky);
+    graphics::drawRect(float(width) / 2.0f, float(width) / 6.0f, float(width), float(width) / 3.0f, sky); // draw sky
 
 	for (int column = 0; column < width; column++)
 	{
@@ -140,6 +140,16 @@ void Camera::RenderSceneAt(int x, int y)
         }
 
         graphics::drawLine(float(column + x), startY, float(column + x), endY, br);
+
 	}
+
+
+    for (auto obj : pScene->gameobjects)
+    {
+        float distance = obj->Position().GetDistance(player_pos);
+
+        graphics::drawRect(800, float(width / 3), width / distance, width / distance, obj->getBrush());
+
+    }
 
 }

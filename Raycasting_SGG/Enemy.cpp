@@ -4,8 +4,8 @@ graphics::Brush Enemy::getBrush() const
 {
 	graphics::Brush sprite;
 
+	sprite.texture = "assets//robot.png";
 	sprite.outline_opacity = 0.0f;
-	sprite.texture = "assets//zombie//zombie_0.png";
 
 	return sprite;
 }
