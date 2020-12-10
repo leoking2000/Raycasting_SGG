@@ -14,7 +14,7 @@ public:
 	static constexpr unsigned int CanvasWidth = 1600u;
 	static constexpr unsigned int CanvasHeight = 900u;
 	///////////////Special Functions//////////////////////
-	void Update(float dt);
+	void Update();
 	void Draw();
 private:
 	//////////Game Functions/////////////////////////////

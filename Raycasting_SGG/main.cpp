@@ -4,7 +4,7 @@ void Update(float dt)
 {
 	Game* game = reinterpret_cast<Game*>(graphics::getUserData());
 
-	game->Update(dt);
+	game->Update();
 }
 
 void Draw()

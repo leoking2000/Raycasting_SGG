@@ -14,6 +14,11 @@ public:
 		position(0.0f,0.0f)
 	{}
 
+	GameObject(float xPos, float yPos)
+		:
+		position(xPos,yPos)
+	{}
+
 	GameObject(const Vector2& pos) 
 		: 
 		position(pos)
@@ -25,6 +30,6 @@ public:
 	graphics::Brush virtual getBrush() const = 0; // gives the info the camera needs to draw the object.
 
 protected:
-	Vector2 position; // world space position
+	Vector2 position; // level space position
 
 };

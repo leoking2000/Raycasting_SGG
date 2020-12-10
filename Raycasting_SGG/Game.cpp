@@ -19,9 +19,9 @@ Game::~Game()
 {
 }
 
-void Game::Update(float dt)
+void Game::Update()
 {
-	scene.player.Update(dt);
+	scene.player.Update();
 
 }
 

@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Data structures">
-      <UniqueIdentifier>{aa18c54e-2d59-4a4a-902e-f4ea9a83acf6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Data structures">
-      <UniqueIdentifier>{7407830d-e52d-4554-b84e-732bdbec432d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Graphics">
       <UniqueIdentifier>{a01c47c7-5457-48a1-815d-6cc071b46808}</UniqueIdentifier>
     </Filter>
@@ -40,6 +34,12 @@
     <Filter Include="Header Files\Interfaces">
       <UniqueIdentifier>{6f018190-db79-452e-8d79-068b1eb8c1de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Utilities">
+      <UniqueIdentifier>{aa18c54e-2d59-4a4a-902e-f4ea9a83acf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utilities">
+      <UniqueIdentifier>{7407830d-e52d-4554-b84e-732bdbec432d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -49,7 +49,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Level.cpp">
-      <Filter>Source Files\Data structures</Filter>
+      <Filter>Source Files\Utilities</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files\Graphics</Filter>
@@ -63,22 +63,22 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Vector2.h">
-      <Filter>Header Files\Data structures</Filter>
+      <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
-      <Filter>Header Files\Data structures</Filter>
+      <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>Header Files\Data structures</Filter>
+      <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Array2D.h">
-      <Filter>Header Files\Data structures</Filter>
+      <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\Interfaces</Filter>
