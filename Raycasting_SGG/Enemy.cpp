@@ -4,7 +4,7 @@ graphics::Brush Enemy::getBrush() const
 {
 	graphics::Brush sprite;
 
-	sprite.texture = "assets//robot.png";
+	sprite.texture = "assets//barrel.png";
 	sprite.outline_opacity = 0.0f;
 
 	return sprite;

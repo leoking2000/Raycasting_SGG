@@ -72,6 +72,8 @@ void Camera::RenderSceneAt(int x, int y)
 
         Vector2int hitPos((int)player_pos.x, (int)player_pos.y);
 
+        int counter = 0;
+
         //perform DDA
         while (!hit)
         {
@@ -88,8 +90,11 @@ void Camera::RenderSceneAt(int x, int y)
                 hitPos.y += stepY;
                 side = 1;
             }
+
+            counter++;
+
             //Check if ray has hit a wall
-            if (pScene->level.Get(hitPos.x, hitPos.y) != '.') hit = true;
+            if (pScene->level.Get(hitPos.x, hitPos.y) != '.' || counter > 500) hit = true;
         }
 
         if (side == 0)
@@ -116,6 +121,7 @@ void Camera::RenderSceneAt(int x, int y)
 
         switch (pScene->level.Get(hitPos.x, hitPos.y))
         {
+            
         case '#':  
             br.outline_color[0] = 0.2f;
             br.outline_color[1] = 0.8f;
@@ -143,7 +149,7 @@ void Camera::RenderSceneAt(int x, int y)
 
 	}
 
-
+    /*
     for (auto obj : pScene->gameobjects)
     {
         float distance = obj->Position().GetDistance(player_pos);
@@ -151,5 +157,6 @@ void Camera::RenderSceneAt(int x, int y)
         graphics::drawRect(800, float(width / 3), width / distance, width / distance, obj->getBrush());
 
     }
+    */
 
 }

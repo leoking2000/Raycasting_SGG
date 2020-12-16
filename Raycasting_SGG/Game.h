@@ -1,5 +1,6 @@
 #pragma once
 #include "Camera.h"
+#include "GameSettings.h"
 
 // a class to hold the game state and logic
 class Game
@@ -10,9 +11,7 @@ public:
 	~Game();
 	Game(const Game& g) = delete;
 	Game& operator=(const Game& g) = delete;
-	///////////////Static Constexpr Data////////////////////////
-	static constexpr unsigned int CanvasWidth = 1600u;
-	static constexpr unsigned int CanvasHeight = 900u;
+	///////////////Static Constexpr Data//////////////////
 	///////////////Special Functions//////////////////////
 	void Update();
 	void Draw();

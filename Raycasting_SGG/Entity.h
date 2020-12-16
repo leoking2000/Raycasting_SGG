@@ -1,5 +1,6 @@
 #pragma once
 #include "Item.h"
+#include "GameSettings.h"
 
 /// <summary>
 /// This interface represents something that can walk in the Level and use Items(see Item.h)
@@ -36,6 +37,7 @@ public:
 	{
 		position += direction * speed * (graphics::getDeltaTime() / 1000);
 	}
+
 	void RotateBy(float rad)
 	{
 		direction.Rotate(rad * graphics::getDeltaTime() / 1000);

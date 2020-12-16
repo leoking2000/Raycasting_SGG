@@ -8,7 +8,7 @@ Level::Level()
 {
 	std::string map;
 
-	map += "##############################";
+	map += "###############.##############";
 	map += "#............................#";
 	map += "#....BBBBBBBBB.BBBBBBBB......#";
 	map += "#........................G...#";
@@ -26,8 +26,8 @@ Level::Level()
 	map += "#..T...R......BR..B......G...#";
 	map += "#..T...G......B...B..........#";
 	map += "#..T...G......B..........G...#";
-	map += "#......G......BBBBB..........#";
-	map += "##############################";
+	map += ".......G......B.BBB...........";
+	map += "###############.##############";
 
 
 	for (int y = 0; y < height; y++)
@@ -46,22 +46,12 @@ Level::Level()
 
 char Level::Get(int x, int y) const
 {
-	assert(y < arr.GetRows());
-	assert(y >= 0);
-	assert(x < arr.GetColumns());
-	assert(x >= 0);
-
-	return arr.Get(y, x);
+	return arr.Get((y % height + height) % height, (x % width + width) % width);
 }
 
 void Level::Set(int x, int y, char v)
 {
-	assert(y < arr.GetRows());
-	assert(y >= 0);
-	assert(x < arr.GetColumns());
-	assert(x >= 0);
-
-	arr.Set(y, x, v);
+	arr.Set((y % height + height) % height, (x % width + width) % width, v);
 }
 
 int Level::GetWidth() const

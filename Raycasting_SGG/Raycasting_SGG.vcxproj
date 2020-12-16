@@ -159,6 +159,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameSettings.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Level.h" />
