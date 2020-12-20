@@ -1,14 +1,5 @@
 #include "Enemy.h"
 
-graphics::Brush Enemy::getBrush() const
-{
-	graphics::Brush sprite;
-
-	sprite.texture = "assets//barrel.png";
-	sprite.outline_opacity = 0.0f;
-
-	return sprite;
-}
 
 void Enemy::Update()
 {

@@ -1,11 +1,5 @@
 #include "Player.h"
 
-
-graphics::Brush Player::getBrush() const
-{
-	return graphics::Brush();
-}
-
 void Player::Update()
 {
 

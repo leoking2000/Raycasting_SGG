@@ -1,5 +1,4 @@
 #include "Game.h"
-#include <string>
 #include "Enemy.h"
 
 Game::Game()
@@ -15,7 +14,13 @@ Game::Game()
 	graphics::setFont("assets//orange juice 2.0.ttf");
 
 
-	scene.gameobjects.push_back(new Enemy(3.0f, 8.0f, 1.0f, 0.0f));
+	scene.gameobjects.push_back(new Enemy(3.0f, 8.0f, 1.0f, 0.0f, std::string("assets//barrel.png")));
+	scene.gameobjects.push_back(new Enemy(20.0f, 18.0f, 1.0f, 0.0f, std::string("assets//robot.png")));
+
+	scene.gameobjects.push_back(new Enemy(25.0f, 14.0f, 1.0f, 0.0f, std::string("assets//pillar.png")));
+	scene.gameobjects.push_back(new Enemy(25.0f, 11.0f, 1.0f, 0.0f, std::string("assets//pillar.png")));
+	scene.gameobjects.push_back(new Enemy(25.0f, 9.0f, 1.0f, 0.0f, std::string("assets//pillar.png")));
+	scene.gameobjects.push_back(new Enemy(25.0f, 7.0f, 1.0f, 0.0f, std::string("assets//pillar.png")));
 
 }
 

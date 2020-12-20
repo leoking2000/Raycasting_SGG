@@ -1,6 +1,7 @@
 #pragma once
 #include "Vector2.h"
 #include "graphics.h"
+#include <string>
 
 /// <summary>
 /// This interface represents something that has a position in the Level(see Level.h).
@@ -9,27 +10,41 @@
 class GameObject
 {
 public:
-	GameObject() 
-		: 
-		position(0.0f,0.0f)
-	{}
-
-	GameObject(float xPos, float yPos)
+	GameObject(const std::string& texture)
 		:
-		position(xPos,yPos)
+		position(0.0f, 0.0f),
+		texture(texture)
 	{}
 
-	GameObject(const Vector2& pos) 
+	GameObject(float xPos, float yPos, const std::string& texture)
+		:
+		position(xPos,yPos),
+		texture(texture)
+	{}
+
+	GameObject(const Vector2& pos, const std::string& texture)
 		: 
-		position(pos)
+		position(pos),
+		texture(texture)
 	{}
 
 	Vector2 Position() const { return position; }
 	void SetPosition(const Vector2& newpos) { position = newpos; }
 
-	graphics::Brush virtual getBrush() const = 0; // gives the info the camera needs to draw the object.
+	// gives the info the camera needs to draw the object.
+	graphics::Brush virtual getBrush() const
+	{
+		graphics::Brush sprite;
+
+		sprite.texture = texture;
+		sprite.outline_opacity = 0.0f;
+
+		return sprite;
+	}
+	
 
 protected:
 	Vector2 position; // level space position
+	std::string texture;
 
 };

@@ -180,6 +180,7 @@ void Camera::RenderScene()
     for (const std::pair<const GameObject*, float>& pair : dists)
     {
         //translate obj position to relative to the camera(player position)
+        if (pair.first == nullptr) continue;
         Vector2 objPos = pair.first->Position() - player_pos;
 
 

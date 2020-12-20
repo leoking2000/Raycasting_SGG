@@ -5,23 +5,21 @@
 class Enemy : public Entity
 {
 public:
-	Enemy()
+	Enemy(const std::string& texture)
 		:
-		Entity(0.0f, 0.0f, 0.0f, 1.0f)
+		Entity(texture)
 	{
 	}
-	Enemy(float xPos, float yPos, float xDir, float yDir)
+	Enemy(float xPos, float yPos, float xDir, float yDir, const std::string& texture)
 		:
-		Entity(xPos, yPos, xDir, yDir)
+		Entity(xPos, yPos, xDir, yDir, texture)
 	{
 	}
-	Enemy(const Vector2& pos, const Vector2& dir)
+	Enemy(const Vector2& pos, const Vector2& dir, const std::string& texture)
 		:
-		Entity(pos, dir)
+		Entity(pos, dir, texture)
 	{
 	}
-
-	graphics::Brush getBrush() const override;
 
 	void Update() override;
 };
