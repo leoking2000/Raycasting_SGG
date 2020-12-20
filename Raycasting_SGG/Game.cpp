@@ -21,6 +21,10 @@ Game::Game()
 	scene.gameobjects.push_back(new Enemy(25.0f, 11.0f, 1.0f, 0.0f, std::string("assets//pillar.png")));
 	scene.gameobjects.push_back(new Enemy(25.0f, 9.0f, 1.0f, 0.0f, std::string("assets//pillar.png")));
 	scene.gameobjects.push_back(new Enemy(25.0f, 7.0f, 1.0f, 0.0f, std::string("assets//pillar.png")));
+	scene.gameobjects.push_back(new Enemy(26.0f, 14.0f, 1.0f, 0.0f, std::string("assets//pillar.png")));
+	scene.gameobjects.push_back(new Enemy(26.0f, 11.0f, 1.0f, 0.0f, std::string("assets//pillar.png")));
+	scene.gameobjects.push_back(new Enemy(26.0f, 9.0f, 1.0f, 0.0f, std::string("assets//pillar.png")));
+	scene.gameobjects.push_back(new Enemy(26.0f, 7.0f, 1.0f, 0.0f, std::string("assets//pillar.png")));
 
 }
 
