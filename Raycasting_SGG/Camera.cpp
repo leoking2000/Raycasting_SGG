@@ -1,10 +1,13 @@
 #include "Camera.h"
+#include <algorithm>
+#include <utility>
 
 Camera::Camera(const Scene* pScene, int width, int height)
 	:
 	pScene(pScene),
     width(width),
-    height(height)
+    height(height),
+    p_zBuffer(new float[width])
 {
     br.outline_opacity = 1.0f;
 
@@ -14,12 +17,18 @@ Camera::Camera(const Scene* pScene, int width, int height)
     sky.fill_opacity = 1.0f;
 }
 
+Camera::~Camera()
+{
+    delete[] p_zBuffer;
+    p_zBuffer = nullptr;
+}
+
 void Camera::setScene(const Scene* pScene_in)
 {
 	pScene = pScene_in;
 }
 
-void Camera::RenderSceneAt(int x, int y)
+void Camera::RenderScene()
 {
     // for drawing what the player sees
 	const Vector2 player_pos = pScene->player.Position();
@@ -28,6 +37,7 @@ void Camera::RenderSceneAt(int x, int y)
 
     graphics::drawRect(float(width) / 2.0f, float(width) / 6.0f, float(width), float(width) / 3.0f, sky); // draw sky
 
+    // wall drawing
 	for (int column = 0; column < width; column++)
 	{
 
@@ -106,6 +116,8 @@ void Camera::RenderSceneAt(int x, int y)
             perpWallDist = (hitPos.y - player_pos.y + (1 - stepY) / 2) / ray_dir.y;
         }
 
+        p_zBuffer[column] = perpWallDist;
+
         //Calculate height of line to draw on screen
         int lineHeight = (int)(width / perpWallDist);
 
@@ -115,9 +127,9 @@ void Camera::RenderSceneAt(int x, int y)
         int drawEnd = lineHeight / 2 + width / 3;
         if (drawEnd >= width) drawEnd = width - 1;
 
-        float startY = float(drawStart + y);
-        float endY = float(drawEnd + y);
-        if (endY > height + y) endY = float(height + y);
+        float startY = float(drawStart);
+        float endY = float(drawEnd);
+        if (endY > height) endY = float(height);
 
         switch (pScene->level.Get(hitPos.x, hitPos.y))
         {
@@ -145,18 +157,60 @@ void Camera::RenderSceneAt(int x, int y)
             br.outline_color[2] = br.outline_color[2] / 2;
         }
 
-        graphics::drawLine(float(column + x), startY, float(column + x), endY, br);
+        graphics::drawLine(float(column), startY, float(column), endY, br);
 
 	}
 
-    /*
-    for (auto obj : pScene->gameobjects)
+    // game object drawing
+
+    // sort game objects by distance by furthest to closest 
+    std::vector<std::pair<const GameObject*,float>> dists(pScene->gameobjects.size() - 1);
+    for (const GameObject* obj : pScene->gameobjects)
     {
         float distance = obj->Position().GetDistance(player_pos);
-
-        graphics::drawRect(800, float(width / 3), width / distance, width / distance, obj->getBrush());
-
+        dists.emplace_back(std::pair<const GameObject*, float>(obj, distance));
     }
-    */
+    std::sort(dists.begin(), dists.end(),
+        [](const std::pair<const GameObject*, float>& lhs, const std::pair<const GameObject*, float>& rhs) 
+        { 
+            return lhs.second > rhs.second; // we want descending order.
+        }
+    );
 
-}
+    for (const std::pair<const GameObject*, float>& pair : dists)
+    {
+        //translate obj position to relative to the camera(player position)
+        Vector2 objPos = pair.first->Position() - player_pos;
+
+
+        //transform obj pos with the inverse camera matrix
+        // [ plane.x   player_dir.x ] -1                                                               [ dirY      -dirX ]
+        // [                        ]       =  1 / (plane.x * player_dir.y - plane.y * player_dir.x) * [                 ]
+        // [ plane.y   player_dir.y ]                                                                  [ -planeY  planeX ]
+
+        float invDet = 1 / (plane.x * player_dir.y - plane.y * player_dir.x); //required for correct matrix multiplication
+
+        Vector2 transform;
+        transform.x = invDet * (player_dir.y * objPos.x - player_dir.x * objPos.y);
+        transform.y = invDet * (-plane.y * objPos.x + plane.x * objPos.y); //this is actually the depth inside the screen, that what Z is in 3D
+
+        int rectScreenX = int((width / 2) * (1 + transform.x / transform.y));
+
+        // can we see the object?
+        //1) it's in front of camera plane so you don't see things behind you
+        //2) it's on the screen (left)
+        //3) it's on the screen (right)
+        //4) ZBuffer, with perpendicular distance
+        if (transform.y > 0 && rectScreenX > 0 && rectScreenX < width && transform.y < p_zBuffer[rectScreenX])
+        {
+            int rectWidth = abs(int(height / (transform.y))); // Canvas size for x dir
+            int rectHeight = std::abs(int(height / (transform.y))); // Canvas size for y dir
+
+            graphics::drawRect((float)rectScreenX, float(width) / 3.0f, (float)rectWidth*2.0f, (float)rectHeight*2.0f, pair.first->getBrush());
+        }
+    }
+
+
+    
+    
+} // RenderSceneAt

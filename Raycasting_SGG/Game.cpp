@@ -33,7 +33,7 @@ void Game::Draw()
 {
 	
 	//camera.RenderSceneAt(scene.level.GetWidth() * 6 + 3, 200);
-	camera.RenderSceneAt(0, 0);
+	camera.RenderScene();
 
 	/////////////minimap////////////////////////
 	graphics::Brush br;
