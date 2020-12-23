@@ -2,9 +2,9 @@
 #include <algorithm>
 #include <utility>
 
-Camera::Camera(const Scene* pScene, int width, int height)
+Camera::Camera(const Level* pLevel, int width, int height)
 	:
-	pScene(pScene),
+    pLevel(pLevel),
     width(width),
     height(height),
     p_zBuffer(new float[width])
@@ -23,16 +23,16 @@ Camera::~Camera()
     p_zBuffer = nullptr;
 }
 
-void Camera::setScene(const Scene* pScene_in)
+void Camera::setLevel(const Level* pLevel_in)
 {
-	pScene = pScene_in;
+	pLevel = pLevel_in;
 }
 
-void Camera::RenderScene()
+void Camera::Render()
 {
     // for drawing what the player sees
-	const Vector2 player_pos = pScene->player.Position();
-	const Vector2 player_dir = pScene->player.Direction();
+	const Vector2 player_pos = pLevel->GetPlayer().Position();
+	const Vector2 player_dir = pLevel->GetPlayer().Direction();
 	const Vector2 plane = { -player_dir.y, player_dir.x };
 
     graphics::drawRect(float(width) / 2.0f, float(width) / 6.0f, float(width), float(width) / 3.0f, sky); // draw sky
@@ -104,7 +104,7 @@ void Camera::RenderScene()
             counter++;
 
             //Check if ray has hit a wall
-            if (pScene->level.Get(hitPos.x, hitPos.y) != '.' || counter > 500) hit = true;
+            if (pLevel->Get(hitPos.x, hitPos.y) != ' ' || counter > 500) hit = true;
         }
 
         if (side == 0)
@@ -131,7 +131,7 @@ void Camera::RenderScene()
         float endY = float(drawEnd);
         if (endY > height) endY = float(height);
 
-        switch (pScene->level.Get(hitPos.x, hitPos.y))
+        switch (pLevel->Get(hitPos.x, hitPos.y))
         {
             
         case '#':  
@@ -164,8 +164,9 @@ void Camera::RenderScene()
     // game object drawing
 
     // sort game objects by distance by furthest to closest 
-    std::vector<std::pair<const GameObject*,float>> dists(pScene->gameobjects.size() - 1);
-    for (const GameObject* obj : pScene->gameobjects)
+    std::vector<GameObject*> gameobjects = pLevel->GameObjects();
+    std::vector<std::pair<const GameObject*,float>> dists(gameobjects.size() - 1);
+    for (const GameObject* obj : gameobjects)
     {
         float distance = obj->Position().GetDistance(player_pos);
         dists.emplace_back(std::pair<const GameObject*, float>(obj, distance));

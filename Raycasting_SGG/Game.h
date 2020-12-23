@@ -20,7 +20,7 @@ private:
 	
 private:
 	//////////////Game variables/////////////////////////
-	Scene scene;
+	Level level;
 	Camera camera;
 
 };

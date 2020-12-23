@@ -1,57 +1,100 @@
 #include "Level.h"
+#include <fstream>
+#include <assert.h>
 
-Level::Level()
-	:
-	width(30),
-	height(20),
-	arr(height, width)
+#include "Enemy.h"
+
+Level::Level(const std::string& filename)
 {
-	std::string map;
+	Load(filename);
+}
 
-	map += "###############.##############";
-	map += "#............................#";
-	map += "#....BBBBBBBBB.BBBBBBBB......#";
-	map += "#............................#";
-	map += "#....GGGGG..........GGG......#";
-	map += "#....GGGGG..........GGG......#";
-	map += "#....RR.RR..RR..RR..RR.......#";
-	map += "#............................#";
-	map += "#............................#";
-	map += "#......BRRRR.RRRRG...........#";
-	map += "#......B.........G...........#";
-	map += "#......BRRRRRRRRRGGGG........#";
-	map += "#..T...B.....................#";
-	map += "#..T...R.....................#";
-	map += "#..T..........BBBBB..........#";
-	map += "#..T...R......BR..B..........#";
-	map += "#..T...G......B...B..........#";
-	map += "#..T...G......B..............#";
-	map += ".......G......B.BBB...........";
-	map += "###############.##############";
+void Level::Load(const std::string& filename)
+{
+	std::ifstream file(filename);
 
+	//if (!file) throw - 1;
+	assert(file);
 
-	for (int y = 0; y < height; y++)
+	std::string map = ""; 
+	int w = 0;
+	int h = 0;
+
+	bool hasReadFirstLine = false;
+
+	while (file.eof())
 	{
-		for (int x = 0; x < width; x++) 
-		{
-			const char c = map[width * y + x];
+		char c = file.get();
+		map += c;
 
-			arr.Set(y, x, c);
+		if (c == '\n')
+		{
+			h++;
+			hasReadFirstLine = true;
+		}
+		else if (hasReadFirstLine == false) {
+			w++;
 		}
 	}
 
+	arr = Array2D<char>(h, w);
+	width = w;
+	height = h;
 
+	for (int y = 0; y < height; y++)
+	{
+		for (int x = 0; x < width; x++)
+		{
+			char c = map[width * y + x];
+
+			switch (c)
+			{
+			case '#':
+				Set(x, y, '#');
+			case 'P':
+				Set(x, y, ' ');
+				player = Player(x + 0.5f, y + 0.0f, 1.0f, 0.0f);
+				break;
+			case 'E':
+				Set(x, y, ' ');
+				gameobjects.emplace_back(new Enemy(x + 0.5f, y + 0.0f, 1.0f, 0.0f, std::string("assets//robot.png")));
+				break;
+			case 'p':
+				Set(x, y, ' ');
+				gameobjects.emplace_back(new Entity(x + 0.5f, y + 0.0f, 1.0f, 0.0f, std::string("assets//pillar.png")));
+				break;
+			case 'b':
+				Set(x, y, ' ');
+				gameobjects.emplace_back(new Entity(x + 0.5f, y + 0.0f, 1.0f, 0.0f, std::string("assets//barrel.png")));
+				break;
+			default:
+				Set(x,y, ' ');
+				break;
+			}
+		}
+	}
+
+}
+
+void Level::Update()
+{
+	for (GameObject* obj : gameobjects)
+	{
+		obj->Update();
+	}
+
+	player.Update();
 
 }
 
 char Level::Get(int x, int y) const
 {
-	return arr.Get((y % height + height) % height, (x % width + width) % width);
+	return arr.Get(y % height, x % width);
 }
 
 void Level::Set(int x, int y, char v)
 {
-	arr.Set((y % height + height) % height, (x % width + width) % width, v);
+	arr.Set(y % height, x % width, v);
 }
 
 int Level::GetWidth() const
@@ -62,4 +105,14 @@ int Level::GetWidth() const
 int Level::GetHeight() const
 {
 	return height;
+}
+
+const Player& Level::GetPlayer() const
+{
+	return player;
+}
+
+const std::vector<GameObject*>& Level::GameObjects() const
+{
+	return gameobjects;
 }

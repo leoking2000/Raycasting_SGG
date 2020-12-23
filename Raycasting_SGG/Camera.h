@@ -1,19 +1,19 @@
 #pragma once
 #include "graphics.h"
-#include "Scene.h"
+#include "Level.h"
 
 class Camera
 {
 public:
-	Camera(const Scene* pScene, int width, int height);
+	Camera(const Level* pLevel, int width, int height);
 	~Camera();
 
-	void setScene(const Scene* pScene);
+	void setLevel(const Level* pLevel_in);
 
-	void RenderScene();
+	void Render();
 
 private:
-	const Scene* pScene;
+	const Level* pLevel;
 
 	const int width;
 	const int height;

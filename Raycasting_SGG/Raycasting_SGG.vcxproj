@@ -161,7 +161,6 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameSettings.h" />
     <ClInclude Include="Item.h" />
-    <ClInclude Include="Scene.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Vector2.h" />
