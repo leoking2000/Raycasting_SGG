@@ -25,7 +25,8 @@ void Level::Load(const std::string& filename)
 	while (file.good())
 	{
 		char c = file.get();
-		map += c;
+
+		if(c != '\n') map += c;
 
 		if (c == '\n')
 		{
@@ -68,8 +69,8 @@ void Level::Load(const std::string& filename)
 				Set(x, y, ' ');
 				gameobjects.emplace_back(new Entity(x + 0.5f, y + 0.0f, 1.0f, 0.0f, std::string("assets//barrel.png")));
 				break;
-			default:
-				Set(x,y, ' ');
+			case ' ':
+				Set(x, y, ' ');
 				break;
 			}
 		}
