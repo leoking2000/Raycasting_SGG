@@ -104,7 +104,7 @@ void Camera::Render()
             counter++;
 
             //Check if ray has hit a wall
-            if (pLevel->Get(hitPos.x, hitPos.y) != ' ' || counter > 500) hit = true;
+            if (pLevel->Get(std::abs(hitPos.x), std::abs(hitPos.y)) != ' ' || counter > 500) hit = true;
         }
 
         if (side == 0)
@@ -131,7 +131,7 @@ void Camera::Render()
         float endY = float(drawEnd);
         if (endY > height) endY = float(height);
 
-        switch (pLevel->Get(hitPos.x, hitPos.y))
+        switch (pLevel->Get(std::abs(hitPos.x), std::abs(hitPos.y)))
         {
             
         case '#':  

@@ -22,7 +22,7 @@ void Level::Load(const std::string& filename)
 
 	bool hasReadFirstLine = false;
 
-	while (file.eof())
+	while (file.good())
 	{
 		char c = file.get();
 		map += c;
@@ -37,10 +37,10 @@ void Level::Load(const std::string& filename)
 		}
 	}
 
-	arr = Array2D<char>(h, w);
 	width = w;
-	height = h;
+	height = h + 1;
 
+	arr = Array2D<char>(height, width);
 	for (int y = 0; y < height; y++)
 	{
 		for (int x = 0; x < width; x++)
@@ -51,9 +51,10 @@ void Level::Load(const std::string& filename)
 			{
 			case '#':
 				Set(x, y, '#');
+				break;
 			case 'P':
 				Set(x, y, ' ');
-				player = Player(x + 0.5f, y + 0.0f, 1.0f, 0.0f);
+				player = Player(x + 0.5f, y + 0.5f, 1.0f, 0.0f);
 				break;
 			case 'E':
 				Set(x, y, ' ');
