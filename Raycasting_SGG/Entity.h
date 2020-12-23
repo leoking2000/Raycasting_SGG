@@ -32,6 +32,8 @@ public:
 		direction.Normalize();
 	}
 
+	void Update() override {}
+
 protected:
 	Vector2 direction;  // world space direction
 	Item* item = nullptr;
