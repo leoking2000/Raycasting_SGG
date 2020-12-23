@@ -11,22 +11,10 @@
 class Entity : public GameObject
 {
 public:
-	Entity(const std::string& texture)
-		:
-		GameObject(0.0f,0.0f,texture),
-		direction(0.0f,1.0f)
-	{
-	}
 	Entity(float xPos, float yPos, float xDir, float yDir, const std::string& texture)
 		:
 		GameObject(xPos, yPos, texture),
 		direction(xDir, yDir)
-	{
-	}
-	Entity(const Vector2& pos, const Vector2& dir, const std::string& texture)
-		:
-		GameObject(pos, texture),
-		direction(dir)
 	{
 	}
 
@@ -43,8 +31,6 @@ public:
 		direction.Rotate(rad * graphics::getDeltaTime() / 1000);
 		direction.Normalize();
 	}
-
-	void virtual Update() = 0;
 
 protected:
 	Vector2 direction;  // world space direction

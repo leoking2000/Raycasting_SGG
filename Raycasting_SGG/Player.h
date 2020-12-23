@@ -14,11 +14,6 @@ public:
 		Entity(xPos, yPos, xDir, yDir, std::string(""))
 	{
 	}
-	Player(const Vector2& pos, const Vector2& dir)
-		:
-		Entity(pos,dir, std::string(""))
-	{
-	}
 
 	void Update() override;
 

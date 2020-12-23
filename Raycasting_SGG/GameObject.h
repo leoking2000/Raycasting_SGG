@@ -10,21 +10,9 @@
 class GameObject
 {
 public:
-	GameObject(const std::string& texture)
-		:
-		position(0.0f, 0.0f),
-		texture(texture)
-	{}
-
 	GameObject(float xPos, float yPos, const std::string& texture)
 		:
 		position(xPos,yPos),
-		texture(texture)
-	{}
-
-	GameObject(const Vector2& pos, const std::string& texture)
-		: 
-		position(pos),
 		texture(texture)
 	{}
 
@@ -41,8 +29,9 @@ public:
 
 		return sprite;
 	}
-	
 
+	void virtual Update() = 0;
+	
 protected:
 	Vector2 position; // level space position
 	std::string texture;
