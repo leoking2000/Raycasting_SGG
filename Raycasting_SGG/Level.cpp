@@ -55,19 +55,19 @@ void Level::Load(const std::string& filename)
 				break;
 			case 'P':
 				Set(x, y, ' ');
-				player = Player(x + 0.5f, y + 0.5f, 1.0f, 0.0f);
+				player = Player(x + 0.5f, y + 0.5f, 0.0f, -1.0f);
 				break;
 			case 'E':
 				Set(x, y, ' ');
-				gameobjects.emplace_back(new Enemy(x + 0.5f, y + 0.0f, 1.0f, 0.0f, std::string("assets//robot.png")));
+				gameobjects.emplace_back(new Enemy(x + 0.5f, y + 0.5f, 1.0f, 0.0f, std::string("assets//robot.png")));
 				break;
 			case 'p':
 				Set(x, y, ' ');
-				gameobjects.emplace_back(new Entity(x + 0.5f, y + 0.0f, 1.0f, 0.0f, std::string("assets//pillar.png")));
+				gameobjects.emplace_back(new Entity(x + 0.5f, y + 0.5f, 1.0f, 0.0f, std::string("assets//pillar.png")));
 				break;
 			case 'b':
 				Set(x, y, ' ');
-				gameobjects.emplace_back(new Entity(x + 0.5f, y + 0.0f, 1.0f, 0.0f, std::string("assets//barrel.png")));
+				gameobjects.emplace_back(new Entity(x + 0.5f, y + 0.5f, 1.0f, 0.0f, std::string("assets//barrel.png")));
 				break;
 			case ' ':
 				Set(x, y, ' ');
