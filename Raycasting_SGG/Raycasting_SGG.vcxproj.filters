@@ -95,11 +95,14 @@
     <ClInclude Include="Enemy.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="GameSettings.h">
-      <Filter>Header Files\Utilities</Filter>
-    </ClInclude>
     <ClInclude Include="Level.h">
       <Filter>Header Files\Collection</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSettings.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
