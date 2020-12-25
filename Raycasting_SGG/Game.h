@@ -11,7 +11,8 @@ public:
 	~Game();
 	Game(const Game& g) = delete;
 	Game& operator=(const Game& g) = delete;
-	///////////////Static Constexpr Data//////////////////
+	//////////Game Functions/////////////////////////////
+	const Level& GetLevel() const;
 	///////////////Special Functions//////////////////////
 	void Update();
 	void Draw();

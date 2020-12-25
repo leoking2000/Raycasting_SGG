@@ -18,6 +18,11 @@ Game::~Game()
 {
 }
 
+const Level& Game::GetLevel() const
+{
+	return level;
+}
+
 void Game::Update()
 {
 	level.Update();
