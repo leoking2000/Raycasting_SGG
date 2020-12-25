@@ -9,8 +9,15 @@ Level::Level(const std::string& filename)
 	Load(filename);
 }
 
+Level::~Level()
+{
+	Free();
+}
+
 void Level::Load(const std::string& filename)
 {
+	Free();
+
 	std::ifstream file(filename);
 
 	//if (!file) throw - 1;
@@ -75,6 +82,7 @@ void Level::Load(const std::string& filename)
 			}
 		}
 	}
+	file.close();
 
 }
 
@@ -97,6 +105,17 @@ char Level::Get(int x, int y) const
 void Level::Set(int x, int y, char v)
 {
 	arr.Set(y % height, x % width, v);
+}
+
+void Level::Free()
+{
+	for (GameObject* obj : gameobjects)
+	{
+		delete obj;
+		obj = nullptr;
+	}
+
+	gameobjects.clear();
 }
 
 int Level::GetWidth() const

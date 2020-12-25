@@ -12,8 +12,8 @@ public:
 		GameObject(xPos,yPos, texture)
 	{}
 
-	void virtual OnPikingUp(class Entity& user) = 0;
-	void virtual OnUse(class Entity& user) = 0;
+	//void virtual OnPikingUp(class Entity& user) = 0;
+	//void virtual OnUse(class Entity& user) = 0;
 
 	void Update() final override
 	{

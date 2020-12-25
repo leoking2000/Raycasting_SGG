@@ -36,5 +36,5 @@ public:
 
 protected:
 	Vector2 direction;  // world space direction
-	Item* item = nullptr;
+	//Item* item = nullptr;
 };

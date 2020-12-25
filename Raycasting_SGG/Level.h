@@ -8,6 +8,7 @@ class Level
 {
 public:
 	Level(const std::string& filename);
+	~Level();
 
 	void Load(const std::string& filename);
 	void Update();
@@ -28,7 +29,7 @@ private:
 
 private:
 	void Set(int x, int y, char v);
-
+	void Free();
 
 };
 

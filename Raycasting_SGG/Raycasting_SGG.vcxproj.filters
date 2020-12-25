@@ -40,6 +40,12 @@
     <Filter Include="Source Files\Utilities">
       <UniqueIdentifier>{7407830d-e52d-4554-b84e-732bdbec432d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Collection">
+      <UniqueIdentifier>{9efd4704-9ec3-40af-9e06-81ed300d21e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Collection">
+      <UniqueIdentifier>{27c7f4f8-8724-41e4-ba78-9a07507c0374}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -47,9 +53,6 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Level.cpp">
-      <Filter>Source Files\Utilities</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files\Graphics</Filter>
@@ -60,15 +63,15 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Source Files\Collection</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Vector2.h">
-      <Filter>Header Files\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="Level.h">
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
@@ -94,6 +97,9 @@
     </ClInclude>
     <ClInclude Include="GameSettings.h">
       <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Header Files\Collection</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
