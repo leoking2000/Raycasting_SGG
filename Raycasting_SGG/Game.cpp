@@ -53,12 +53,15 @@ void Game::Draw()
 
 	graphics::Brush br;
 
+	// DEBUG
 	if (graphics::getKeyState(graphics::SCANCODE_M))
 	{
+		const int scale = 20;
+
 		/////////////////// minimap //////////////////
-		br.fill_color[0] = 0.0;
-		br.fill_color[1] = 0.5;
-		br.fill_color[2] = 0.5f;
+		br.fill_color[0] = 0.7;
+		br.fill_color[1] = 0.7;
+		br.fill_color[2] = 0.7f;
 		br.outline_opacity = 0.0f;
 
 		for (int y = 0; y < level.GetHeight(); y++)
@@ -67,7 +70,7 @@ void Game::Draw()
 			{
 				if (level.Get(x, y) != ' ')
 				{
-					graphics::drawRect(float(x * 6 + 3), float(y * 6 + 3), 5.0f, 5.0f, br);
+					graphics::drawRect(float(x * scale + scale / 2), float(y * scale + scale / 2), scale - 1, scale - 1, br);
 				}
 			}
 		}
@@ -75,13 +78,31 @@ void Game::Draw()
 		br.fill_color[0] = 1.0f;
 		br.fill_color[1] = 0.0f;
 		br.fill_color[2] = 0.0f;
-
+		// player
 		Vector2 v = level.GetPlayer().Position() + level.GetPlayer().Direction();
-
-		graphics::drawDisk(level.GetPlayer().Position().x * 6 + 3, level.GetPlayer().Position().y * 6 + 3, 2, br);
+		graphics::drawDisk(level.GetPlayer().Position().x * scale, level.GetPlayer().Position().y * scale, 2, br);
 		br.outline_opacity = 1.0f;
-		graphics::drawLine(level.GetPlayer().Position().x * 6 + 3, level.GetPlayer().Position().y * 6 + 3,
-			v.x * 6 + 3, v.y * 6 + 3, br);
+		graphics::drawLine(level.GetPlayer().Position().x * scale, level.GetPlayer().Position().y * scale,
+			v.x * scale, v.y * scale, br);
+
+		br.fill_opacity = 0.0f;
+		br.outline_opacity = 1.0f;
+		Rectangle body = level.GetPlayer().getRectangle();
+		graphics::drawRect(body.GetCenter().x * scale, body.GetCenter().y * scale, body.GetWidth() * scale, body.GetHeight() * scale, br);
+		br.fill_opacity = 1.0f;
+		br.outline_opacity = 0.0f;
+
+		for (GameObject* obj : level.GameObjects())
+		{
+			graphics::drawDisk(obj->Position().x * scale, obj->Position().y * scale, 2, br);
+
+			br.fill_opacity = 0.0f;
+			br.outline_opacity = 1.0f;
+			Rectangle body = obj->getRectangle();
+			graphics::drawRect(body.GetCenter().x * scale, body.GetCenter().y * scale, body.GetWidth() * scale, body.GetHeight() * scale, br);
+			br.fill_opacity = 1.0f;
+			br.outline_opacity = 0.0f;
+		}
 	}
 
 	//FPS counter

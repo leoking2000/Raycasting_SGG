@@ -23,6 +23,7 @@ public:
 	void GoForward(float speed)
 	{
 		position += direction * speed * (graphics::getDeltaTime() / 1000);
+		body.SetCenter(position);
 	}
 
 	void RotateBy(float rad)

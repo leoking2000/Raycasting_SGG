@@ -1,5 +1,5 @@
 #pragma once
-#include "Vector2.h"
+#include "Rectangle.h"
 #include "graphics.h"
 #include <string>
 
@@ -12,12 +12,18 @@ class GameObject
 public:
 	GameObject(float xPos, float yPos, const std::string& texture)
 		:
-		position(xPos,yPos),
-		texture(texture)
+		position(xPos, yPos),
+		texture(texture),
+		body(position, 1, 1)
 	{}
 
 	Vector2 Position() const { return position; }
 	void SetPosition(const Vector2& newpos) { position = newpos; }
+
+	Rectangle getRectangle() const
+	{
+		return body;
+	}
 
 	// gives the info the camera needs to draw the object.
 	graphics::Brush virtual getBrush() const
@@ -35,5 +41,6 @@ public:
 protected:
 	Vector2 position; // level space position
 	std::string texture;
+	Rectangle body;
 
 };
