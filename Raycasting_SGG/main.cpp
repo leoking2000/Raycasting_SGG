@@ -15,6 +15,13 @@ void Draw()
 	game->Draw();
 }
 
+void resize(int new_w, int new_h)
+{
+	Game* game = reinterpret_cast<Game*>(graphics::getUserData());
+
+	game->ResizeCanvas(new_w, new_h);
+}
+
 int main()
 {
 	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);
@@ -24,15 +31,16 @@ int main()
 	_CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_FILE);
 	_CrtSetReportFile(_CRT_ASSERT, _CRTDBG_FILE_STDERR);
 
-    graphics::createWindow(CanvasWidth, CanvasHeight, "Game");
-	graphics::setCanvasScaleMode(graphics::CANVAS_SCALE_WINDOW);
-	graphics::setCanvasSize((float)CanvasWidth, (float)CanvasHeight);
+    graphics::createWindow(1600, 900, "Game");
+	graphics::setCanvasScaleMode(graphics::CANVAS_SCALE_FIT);
+	graphics::setCanvasSize((float)1600, (float)900);
 
 	Game* game = new Game();
 
 	graphics::setUserData(game);
 	graphics::setDrawFunction(Draw);
 	graphics::setUpdateFunction(Update);
+	graphics::setResizeFunction(resize);
 
 	graphics::startMessageLoop();
 

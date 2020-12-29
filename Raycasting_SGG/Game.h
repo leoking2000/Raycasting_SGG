@@ -1,6 +1,6 @@
 #pragma once
 #include "Camera.h"
-#include "GameSettings.h"
+//#include "GameSettings.h"
 
 // a class to hold the game state and logic
 class Game
@@ -11,16 +11,21 @@ public:
 	~Game();
 	Game(const Game& g) = delete;
 	Game& operator=(const Game& g) = delete;
-	//////////Game Functions/////////////////////////////
+	//////////Getters Functions/////////////////////////////
+	int CanvasWidth() const;
+	int CanvasHeight() const;
 	const Level& GetLevel() const;
 	///////////////Special Functions//////////////////////
 	void Update();
 	void Draw();
+	void ResizeCanvas(int w, int h);
 private:
 	//////////Game Functions/////////////////////////////
 	
 private:
 	//////////////Game variables/////////////////////////
+	int canvaswidth = 1600;
+	int canvasheight = 900;
 	Level level;
 	Camera camera;
 

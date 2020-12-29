@@ -4,7 +4,7 @@
 Game::Game()
 	:
 	level("assets//Levels//TestLevel.txt"),
-	camera(&level, CanvasWidth, CanvasHeight)
+	camera(1600)
 {
 	graphics::Brush background;
 	background.fill_color[0] = 0.2f;
@@ -18,6 +18,16 @@ Game::~Game()
 {
 }
 
+int Game::CanvasWidth() const
+{
+	return canvaswidth;
+}
+
+int Game::CanvasHeight() const
+{
+	return canvasheight;
+}
+
 const Level& Game::GetLevel() const
 {
 	return level;
@@ -26,6 +36,15 @@ const Level& Game::GetLevel() const
 void Game::Update()
 {
 	level.Update();
+}
+
+void Game::ResizeCanvas(int w, int h)
+{
+	canvaswidth = w;
+	canvasheight = h;
+	camera.ResizeBuffer();
+
+	graphics::setCanvasSize(canvaswidth, canvasheight);
 }
 
 void Game::Draw()

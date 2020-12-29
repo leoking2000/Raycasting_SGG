@@ -1,6 +1,5 @@
 #pragma once
 #include "Item.h"
-#include "GameSettings.h"
 
 /// <summary>
 /// This interface represents something that can walk in the Level and use Items(see Item.h)

@@ -5,19 +5,11 @@
 class Camera
 {
 public:
-	Camera(const Level* pLevel, int width, int height);
+	Camera(int width);
 	~Camera();
-
-	void setLevel(const Level* pLevel_in);
-
 	void Render();
-
+	void ResizeBuffer();
 private:
-	const Level* pLevel;
-
-	const int width;
-	const int height;
-
 	float* p_zBuffer = nullptr;
 
 	graphics::Brush br;

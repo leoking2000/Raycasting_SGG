@@ -1,14 +1,14 @@
 #include "Camera.h"
 #include <algorithm>
 #include <utility>
+#include "Game.h"
 
-Camera::Camera(const Level* pLevel, int width, int height)
-	:
-    pLevel(pLevel),
-    width(width),
-    height(height),
-    p_zBuffer(new float[width])
+Camera::Camera(int width)
 {
+    Game* game = reinterpret_cast<Game*>(graphics::getUserData());
+
+    p_zBuffer = new float[width];
+
     br.outline_opacity = 1.0f;
 
     sky.fill_color[0] = 0.8f;
@@ -23,16 +23,24 @@ Camera::~Camera()
     p_zBuffer = nullptr;
 }
 
-void Camera::setLevel(const Level* pLevel_in)
+void Camera::ResizeBuffer()
 {
-	pLevel = pLevel_in;
+    Game* game = reinterpret_cast<Game*>(graphics::getUserData());
+    delete[] p_zBuffer;
+    p_zBuffer = new float[game->CanvasWidth()];
 }
 
 void Camera::Render()
 {
+    Game* game = reinterpret_cast<Game*>(graphics::getUserData());
+
+    const int width = game->CanvasWidth();
+    const int height = game->CanvasHeight();
+    const Level& pLevel = game->GetLevel();
+
     // for drawing what the player sees
-	const Vector2 player_pos = pLevel->GetPlayer().Position();
-	const Vector2 player_dir = pLevel->GetPlayer().Direction();
+	const Vector2 player_pos = pLevel.GetPlayer().Position();
+	const Vector2 player_dir = pLevel.GetPlayer().Direction();
 	const Vector2 plane = { -player_dir.y, player_dir.x };
 
     graphics::drawRect(float(width) / 2.0f, float(width) / 6.0f, float(width), float(width) / 3.0f, sky); // draw sky
@@ -104,7 +112,7 @@ void Camera::Render()
             counter++;
 
             //Check if ray has hit a wall
-            if (pLevel->Get(std::abs(hitPos.x), std::abs(hitPos.y)) != ' ' || counter > 500) hit = true;
+            if (pLevel.Get(std::abs(hitPos.x), std::abs(hitPos.y)) != ' ' || counter > 500) hit = true;
         }
 
         if (side == 0)
@@ -131,7 +139,7 @@ void Camera::Render()
         float endY = float(drawEnd);
         if (endY > height) endY = float(height);
 
-        switch (pLevel->Get(std::abs(hitPos.x), std::abs(hitPos.y)))
+        switch (pLevel.Get(std::abs(hitPos.x), std::abs(hitPos.y)))
         {
             
         case '#':  
@@ -164,7 +172,7 @@ void Camera::Render()
     // game object drawing
 
     // sort game objects by distance by furthest to closest 
-    std::vector<GameObject*> gameobjects = pLevel->GameObjects();
+    std::vector<GameObject*> gameobjects = pLevel.GameObjects();
     std::vector<std::pair<const GameObject*,float>> dists(gameobjects.size() - 1);
     for (const GameObject* obj : gameobjects)
     {
