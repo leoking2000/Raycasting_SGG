@@ -5,12 +5,12 @@ void Enemy::Update()
 {
 	if (graphics::getKeyState(graphics::SCANCODE_W))
 	{
-		GoForward(5.0f);
+		GoForward(speed);
 	}
 
 	if (graphics::getKeyState(graphics::SCANCODE_S))
 	{
-		GoForward(-5.0f);
+		GoForward(-speed);
 	}
 
 	if (graphics::getKeyState(graphics::SCANCODE_A))

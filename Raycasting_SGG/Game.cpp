@@ -44,7 +44,7 @@ void Game::ResizeCanvas(int w, int h)
 	canvasheight = h;
 	camera.ResizeBuffer();
 
-	graphics::setCanvasSize(canvaswidth, canvasheight);
+	graphics::setCanvasSize((float)canvaswidth, (float)canvasheight);
 }
 
 void Game::Draw()
@@ -59,8 +59,8 @@ void Game::Draw()
 		const int scale = 20;
 
 		/////////////////// minimap //////////////////
-		br.fill_color[0] = 0.7;
-		br.fill_color[1] = 0.7;
+		br.fill_color[0] = 0.7f;
+		br.fill_color[1] = 0.7f;
 		br.fill_color[2] = 0.7f;
 		br.outline_opacity = 0.0f;
 

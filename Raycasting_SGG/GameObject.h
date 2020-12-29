@@ -14,7 +14,7 @@ public:
 		:
 		position(xPos, yPos),
 		texture(texture),
-		body(position, 1, 1)
+		body(position, 0.7f, 0.7f)
 	{}
 
 	Vector2 Position() const { return position; }

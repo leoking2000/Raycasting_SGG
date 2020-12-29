@@ -32,9 +32,15 @@ public:
 		direction.Normalize();
 	}
 
-	void Update() override {}
+	void HandleCollision();
+
+	void Update() override 
+	{
+	}
 
 protected:
 	Vector2 direction;  // world space direction
+	float speed = 5.0f;
+
 	//Item* item = nullptr;
 };
