@@ -5,8 +5,6 @@
 
 Camera::Camera(int width)
 {
-    Game* game = reinterpret_cast<Game*>(graphics::getUserData());
-
     p_zBuffer = new float[width];
 
     br.outline_opacity = 1.0f;
@@ -43,7 +41,8 @@ void Camera::Render()
 	const Vector2 player_dir = pLevel.GetPlayer().Direction();
 	const Vector2 plane = { -player_dir.y, player_dir.x };
 
-    graphics::drawRect(float(width) / 2.0f, float(width) / 6.0f, float(width), float(width) / 3.0f, sky); // draw sky
+    // draw sky
+    graphics::drawRect(float(width) / 2.0f, float(width) / 6.0f, float(width), float(width) / 3.0f, sky);
 
     // wall drawing
 	for (int column = 0; column < width; column++)

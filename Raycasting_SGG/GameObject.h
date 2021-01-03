@@ -1,46 +1,39 @@
 #pragma once
 #include "Rectangle.h"
 #include "graphics.h"
-#include <string>
 
 /// <summary>
-/// This interface represents something that has a position in the Level(see Level.h).
-/// It is used by the camera to draw the Entities and Items.
+/// 
+/// 
 /// </summary>
 class GameObject
 {
 public:
-	GameObject(float xPos, float yPos, const std::string& texture)
-		:
-		position(xPos, yPos),
-		texture(texture),
-		body(position, 0.7f, 0.7f)
-	{}
-
-	Vector2 Position() const { return position; }
-	void SetPosition(const Vector2& newpos) { position = newpos; }
-
-	Rectangle getRectangle() const
+	enum State
 	{
-		return body;
-	}
-
-	// gives the info the camera needs to draw the object.
-	graphics::Brush virtual getBrush() const
+		DEAD,     // if it is dead it should be deleted from memory. 
+		INACTIVE, // if it is inactive it should not be drawn or update.
+		SLEEPING, // if it is sleeping it should not be updated.
+		ACTIVE    // if it is active all ok.
+	};
+	// the type is used in order to have proper collision response and drawing.
+	enum Type
 	{
-		graphics::Brush sprite;
+		ENTITY,
+		ITEM,
+		PROJECTILE,
+		UI
+	};
+public:
+	GameObject::State getState();
 
-		sprite.texture = texture;
-		sprite.outline_opacity = 0.0f;
+	Vector2 virtual Position() const = 0;
+	graphics::Brush virtual GetBrush() const = 0;
 
-		return sprite;
-	}
-
-	void virtual Update() = 0;
-	
-protected:
-	Vector2 position; // level space position
-	std::string texture;
-	Rectangle body;
-
+	Rectangle virtual GetBody() const = 0;
+	Vector2 virtual Direction() const = 0;
+	void virtual Update() { };
+private:
+	State state;
+	Type type;
 };
