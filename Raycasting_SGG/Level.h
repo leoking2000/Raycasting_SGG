@@ -1,6 +1,6 @@
 #pragma once
 #include "Array2D.h"
-#include "Player.h"
+#include "GameObject.h"
 #include <string>
 #include <vector>
 
@@ -17,14 +17,14 @@ public:
 	int GetWidth() const;
 	int GetHeight() const;
 
-	const Player& GetPlayer() const;
+	const GameObject* const GetPlayer() const;
 	const std::vector<GameObject*>& GameObjects() const;
 
 private:
 	int width;
 	int height;
 	Array2D<char> arr;
-	Player player;
+	GameObject* player;
 	std::vector<GameObject*> gameobjects;
 
 private:

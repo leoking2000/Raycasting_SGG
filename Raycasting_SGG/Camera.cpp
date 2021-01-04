@@ -37,8 +37,8 @@ void Camera::Render()
     const Level& pLevel = game->GetLevel();
 
     // for drawing what the player sees
-	const Vector2 player_pos = pLevel.GetPlayer().Position();
-	const Vector2 player_dir = pLevel.GetPlayer().Direction();
+	const Vector2 player_pos = pLevel.GetPlayer()->Position();
+	const Vector2 player_dir = pLevel.GetPlayer()->Direction();
 	const Vector2 plane = { -player_dir.y, player_dir.x };
 
     // draw sky
@@ -173,11 +173,16 @@ void Camera::Render()
     // sort game objects by distance by furthest to closest 
     std::vector<GameObject*> gameobjects = pLevel.GameObjects();
     std::vector<std::pair<const GameObject*,float>> dists(gameobjects.size() - 1);
+
     for (const GameObject* obj : gameobjects)
     {
-        float distance = obj->Position().GetDistance(player_pos);
-        dists.emplace_back(std::pair<const GameObject*, float>(obj, distance));
+        if (obj->getState() >= GameObject::State::SLEEPING)
+        {
+            float distance = obj->Position().GetDistance(player_pos);
+            dists.emplace_back(std::pair<const GameObject*, float>(obj, distance));
+        }
     }
+
     std::sort(dists.begin(), dists.end(),
         [](const std::pair<const GameObject*, float>& lhs, const std::pair<const GameObject*, float>& rhs) 
         { 
@@ -215,7 +220,7 @@ void Camera::Render()
             int rectWidth = abs(int(height / (transform.y))); // Canvas size for x dir
             int rectHeight = std::abs(int(height / (transform.y))); // Canvas size for y dir
 
-            graphics::drawRect((float)rectScreenX, float(width) / 3.0f, (float)rectWidth*2.0f, (float)rectHeight*2.0f, pair.first->getBrush());
+            graphics::drawRect((float)rectScreenX, float(width) / 3.0f, (float)rectWidth*2.0f, (float)rectHeight*2.0f, pair.first->GetBrush());
         }
     }
 

@@ -2,7 +2,8 @@
 #include <fstream>
 #include <assert.h>
 
-#include "Enemy.h"
+#include "Player.h"
+#include "Decoration.h"
 
 Level::Level(const std::string& filename)
 {
@@ -20,7 +21,6 @@ void Level::Load(const std::string& filename)
 
 	std::ifstream file(filename);
 
-	//if (!file) throw - 1;
 	assert(file);
 
 	std::string map = ""; 
@@ -62,19 +62,19 @@ void Level::Load(const std::string& filename)
 				break;
 			case 'P':
 				Set(x, y, ' ');
-				player = Player(x + 0.5f, y + 0.5f, 0.0f, -1.0f);
+				player = new Player(x + 0.5f, y + 0.5f, 0.0f, -1.0f,5.0f, 2.0f);
 				break;
 			case 'E':
 				Set(x, y, ' ');
-				gameobjects.emplace_back(new Enemy(x + 0.5f, y + 0.5f, 1.0f, 0.0f, std::string("assets//robot.png")));
+				gameobjects.emplace_back(new Decoration(x + 0.5f, y + 0.5f, 1.0f, 100.0f, std::string("assets//robot.png")));
 				break;
 			case 'p':
 				Set(x, y, ' ');
-				gameobjects.emplace_back(new Entity(x + 0.5f, y + 0.5f, 1.0f, 0.0f, std::string("assets//pillar.png")));
+				gameobjects.emplace_back(new Decoration(x + 0.5f, y + 0.5f, 1.0f, 100.0f, std::string("assets//pillar.png")));
 				break;
 			case 'b':
 				Set(x, y, ' ');
-				gameobjects.emplace_back(new Entity(x + 0.5f, y + 0.5f, 1.0f, 0.0f, std::string("assets//barrel.png")));
+				gameobjects.emplace_back(new Decoration(x + 0.5f, y + 0.5f, 1.0f, 5.0f, std::string("assets//barrel.png")));
 				break;
 			case ' ':
 				Set(x, y, ' ');
@@ -93,7 +93,7 @@ void Level::Update()
 		obj->Update();
 	}
 
-	player.Update();
+	player->Update();
 
 }
 
@@ -115,6 +115,8 @@ void Level::Free()
 		obj = nullptr;
 	}
 
+	delete player;
+	player = nullptr;
 	gameobjects.clear();
 }
 
@@ -128,7 +130,7 @@ int Level::GetHeight() const
 	return height;
 }
 
-const Player& Level::GetPlayer() const
+const GameObject* const Level::GetPlayer() const
 {
 	return player;
 }

@@ -1,16 +1,17 @@
 #pragma once
 #include "GameObject.h"
+#include <string>
 
-class Player : public GameObject
+class Decoration : public GameObject
 {
 public:
-	Player(float xPos, float yPos, float xDir, float yDir, float speed,float rotationSpeed)
+public:
+	Decoration(float xPos, float yPos, float size, float health, const std::string& texture)
 		:
-		position(xPos,yPos),
-		direction(xDir, yDir),
-		body(position, 0.5f, 0.5f),
-		speed(speed),
-		rotationSpeed(rotationSpeed)
+		position(xPos, yPos),
+		body(position, size, size),
+		health(health),
+		texture(texture)
 	{
 	}
 
@@ -27,12 +28,10 @@ public:
 
 private:
 	Vector2 position;
-	Vector2 direction;
 	Rectangle body;
-	float speed;
-	float rotationSpeed;
-	
-	GameObject::State state = GameObject::State::ACTIVE;
+	float health;
+	const std::string texture;
+
+	GameObject::State state = GameObject::State::SLEEPING;
 	GameObject::Type type = GameObject::Type::ENTITY;
 };
-

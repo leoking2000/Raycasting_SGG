@@ -37,15 +37,6 @@
     <Filter Include="Header Files\Utilities">
       <UniqueIdentifier>{aa18c54e-2d59-4a4a-902e-f4ea9a83acf6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Utilities">
-      <UniqueIdentifier>{7407830d-e52d-4554-b84e-732bdbec432d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Collection">
-      <UniqueIdentifier>{9efd4704-9ec3-40af-9e06-81ed300d21e9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Collection">
-      <UniqueIdentifier>{27c7f4f8-8724-41e4-ba78-9a07507c0374}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -60,11 +51,11 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
+    <ClCompile Include="Decoration.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
     <ClCompile Include="Level.cpp">
-      <Filter>Source Files\Collection</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -86,20 +77,14 @@
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Header Files\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Header Files\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Level.h">
-      <Filter>Header Files\Collection</Filter>
-    </ClInclude>
     <ClInclude Include="Rectangle.h">
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Header Files\Interfaces</Filter>
+    <ClInclude Include="Decoration.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

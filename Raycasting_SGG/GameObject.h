@@ -11,29 +11,29 @@ class GameObject
 public:
 	enum State
 	{
-		DEAD,     // if it is dead it should be deleted from memory. 
-		INACTIVE, // if it is inactive it should not be drawn or update.
-		SLEEPING, // if it is sleeping it should not be updated.
-		ACTIVE    // if it is active all ok.
+		DEAD     = 0, // if it is dead it should be deleted from memory. 
+		INACTIVE = 1, // if it is inactive it should not be drawn or update.
+		SLEEPING = 2, // if it is sleeping it should not be updated.
+		ACTIVE   = 3  // if it is active all ok.
 	};
 	// the type is used in order to have proper collision response and drawing.
 	enum Type
 	{
 		ENTITY,
 		ITEM,
-		PROJECTILE,
-		UI
+		PROJECTILE
 	};
 public:
-	GameObject::State getState();
+	virtual ~GameObject() {};
 
-	Vector2 virtual Position() const = 0;
-	graphics::Brush virtual GetBrush() const = 0;
+	GameObject::State virtual getState() const = 0;
+	GameObject::Type virtual getType() const = 0;
 
-	Rectangle virtual GetBody() const = 0;
-	Vector2 virtual Direction() const = 0;
+	Vector2 virtual Position() const = 0; // the position in level space.
+	graphics::Brush virtual GetBrush() const = 0; // info to how to draw the object.
+
+	Rectangle virtual GetBody() const = 0; // used for collition detection.
+	void virtual Hit(const GameObject& other) = 0; // used for collition response.
+	Vector2 virtual Direction() const = 0; // the direction in level space.
 	void virtual Update() { };
-private:
-	State state;
-	Type type;
 };

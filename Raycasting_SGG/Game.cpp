@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "Enemy.h"
 
 Game::Game()
 	:
@@ -79,15 +78,15 @@ void Game::Draw()
 		br.fill_color[1] = 0.0f;
 		br.fill_color[2] = 0.0f;
 		// player
-		Vector2 v = level.GetPlayer().Position() + level.GetPlayer().Direction();
-		graphics::drawDisk(level.GetPlayer().Position().x * scale, level.GetPlayer().Position().y * scale, 2, br);
+		Vector2 v = level.GetPlayer()->Position() + level.GetPlayer()->Direction();
+		graphics::drawDisk(level.GetPlayer()->Position().x * scale, level.GetPlayer()->Position().y * scale, 2, br);
 		br.outline_opacity = 1.0f;
-		graphics::drawLine(level.GetPlayer().Position().x * scale, level.GetPlayer().Position().y * scale,
+		graphics::drawLine(level.GetPlayer()->Position().x * scale, level.GetPlayer()->Position().y * scale,
 			v.x * scale, v.y * scale, br);
 
 		br.fill_opacity = 0.0f;
 		br.outline_opacity = 1.0f;
-		Rectangle body = level.GetPlayer().getRectangle();
+		Rectangle body = level.GetPlayer()->GetBody();
 		graphics::drawRect(body.GetCenter().x * scale, body.GetCenter().y * scale, body.GetWidth() * scale, body.GetHeight() * scale, br);
 		br.fill_opacity = 1.0f;
 		br.outline_opacity = 0.0f;
@@ -98,7 +97,7 @@ void Game::Draw()
 
 			br.fill_opacity = 0.0f;
 			br.outline_opacity = 1.0f;
-			Rectangle body = obj->getRectangle();
+			Rectangle body = obj->GetBody();
 			graphics::drawRect(body.GetCenter().x * scale, body.GetCenter().y * scale, body.GetWidth() * scale, body.GetHeight() * scale, br);
 			br.fill_opacity = 1.0f;
 			br.outline_opacity = 0.0f;
