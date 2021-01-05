@@ -3,18 +3,25 @@
 
 void Player::Update()
 {
-
+	Game* game = reinterpret_cast<Game*>(graphics::getUserData());
+	const Level& level = game->GetLevel();
 
 	if (graphics::getKeyState(graphics::SCANCODE_UP))
 	{
 		Vector2 newPosition = body.GetCenter() + direction * speed * (graphics::getDeltaTime() / 1000);
-		body.SetCenter(newPosition);
+		if (level.Get(int(newPosition.x), int(newPosition.y)) == ' ')
+		{
+			body.SetCenter(newPosition);
+		}	
 	}
 
 	if (graphics::getKeyState(graphics::SCANCODE_DOWN))
 	{
 		Vector2 newPosition = body.GetCenter() + direction * (-1) * speed * (graphics::getDeltaTime() / 1000);
-		body.SetCenter(newPosition);
+		if (level.Get(int(newPosition.x), int(newPosition.y)) == ' ')
+		{
+			body.SetCenter(newPosition);
+		}
 	}
 
 	if (graphics::getKeyState(graphics::SCANCODE_LEFT))
@@ -28,6 +35,7 @@ void Player::Update()
 		direction.Rotate(rotationSpeed * graphics::getDeltaTime() / 1000);
 		direction.Normalize();
 	}
+
 }
 
 GameObject::State Player::getState() const
@@ -52,7 +60,7 @@ graphics::Brush Player::GetBrush() const
 	return br;
 }
 
-Rectangle Player::GetBody() const
+Circle Player::GetBody() const
 {
 	return body;
 }
@@ -62,7 +70,11 @@ void Player::Hit(const GameObject& other)
 	switch (other.getType())
 	{
 	case GameObject::Type::ENTITY:
-		
+		Vector2 moveDir = (body.GetCenter() - other.GetBody().GetCenter());
+		const float moveBy = body.GetRadious() + other.GetBody().GetRadious() - moveDir.GetLength();
+
+		Vector2 newPosition = body.GetCenter() + moveDir.Normalize() * moveBy;
+		body.SetCenter(newPosition);
 		break;
 	}
 

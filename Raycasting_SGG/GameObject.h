@@ -1,5 +1,5 @@
 #pragma once
-#include "Rectangle.h"
+#include "Circle.h"
 #include "graphics.h"
 
 /// <summary>
@@ -30,7 +30,7 @@ public:
 	Vector2 virtual Position() const = 0; // the position in level space.
 	graphics::Brush virtual GetBrush() const = 0; // info to how to draw the object.
 
-	Rectangle virtual GetBody() const = 0; // used for collition detection.
+	Circle virtual GetBody() const = 0; // used for collition detection.
 	void virtual Hit(const GameObject& other) = 0; // used for collition response.
 	Vector2 virtual Direction() const = 0; // the direction in level space.
 	void virtual Update() { };

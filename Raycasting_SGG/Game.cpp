@@ -86,8 +86,8 @@ void Game::Draw()
 
 		br.fill_opacity = 0.0f;
 		br.outline_opacity = 1.0f;
-		Rectangle body = level.GetPlayer()->GetBody();
-		graphics::drawRect(body.GetCenter().x * scale, body.GetCenter().y * scale, body.GetWidth() * scale, body.GetHeight() * scale, br);
+		Circle body = level.GetPlayer()->GetBody();
+		graphics::drawDisk(body.GetCenter().x * scale, body.GetCenter().y * scale, body.GetRadious() * scale, br);
 		br.fill_opacity = 1.0f;
 		br.outline_opacity = 0.0f;
 
@@ -97,8 +97,8 @@ void Game::Draw()
 
 			br.fill_opacity = 0.0f;
 			br.outline_opacity = 1.0f;
-			Rectangle body = obj->GetBody();
-			graphics::drawRect(body.GetCenter().x * scale, body.GetCenter().y * scale, body.GetWidth() * scale, body.GetHeight() * scale, br);
+			Circle body = obj->GetBody();
+			graphics::drawDisk(body.GetCenter().x * scale, body.GetCenter().y * scale, body.GetRadious() * scale, br);
 			br.fill_opacity = 1.0f;
 			br.outline_opacity = 0.0f;
 		}

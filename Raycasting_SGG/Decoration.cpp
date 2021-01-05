@@ -25,7 +25,7 @@ graphics::Brush Decoration::GetBrush() const
     return br;
 }
 
-Rectangle Decoration::GetBody() const
+Circle Decoration::GetBody() const
 {
     return body;
 }

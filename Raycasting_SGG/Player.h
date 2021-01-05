@@ -7,7 +7,7 @@ public:
 	Player(float xPos, float yPos, float xDir, float yDir, float speed,float rotationSpeed)
 		:
 		direction(xDir, yDir),
-		body({ xPos, yPos }, 0.5f, 0.5f),
+		body({ xPos, yPos }, 0.25f),
 		speed(speed),
 		rotationSpeed(rotationSpeed)
 	{
@@ -19,14 +19,14 @@ public:
 	Vector2 Position() const override; // the position in level space.
 	graphics::Brush GetBrush() const override; // info to how to draw the object.
 
-	Rectangle GetBody() const override; // used for collition detection.
+	Circle GetBody() const override; // used for collition detection.
 	void virtual Hit(const GameObject& other) override; // used for collition response.
 	Vector2 Direction() const override; // the direction in level space.
 	void Update() override;
 
 private:
 	Vector2 direction;
-	Rectangle body;
+	Circle body;
 	float speed;
 	float rotationSpeed;
 	

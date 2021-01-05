@@ -7,7 +7,7 @@ class Decoration : public GameObject
 public:
 	Decoration(float xPos, float yPos, float size, float health, const std::string& texture)
 		:
-		body({ xPos, yPos }, size, size),
+		body({ xPos, yPos }, size),
 		health(health),
 		texture(texture)
 	{
@@ -19,13 +19,13 @@ public:
 	Vector2 Position() const override; // the position in level space.
 	graphics::Brush GetBrush() const override; // info to how to draw the object.
 
-	Rectangle GetBody() const override; // used for collition detection.
+	Circle GetBody() const override; // used for collition detection.
 	void virtual Hit(const GameObject& other) override; // used for collition response.
 	Vector2 Direction() const override; // the direction in level space.
 	void Update() override;
 
 private:
-	Rectangle body;
+	Circle body;
 	float health;
 	const std::string texture;
 
