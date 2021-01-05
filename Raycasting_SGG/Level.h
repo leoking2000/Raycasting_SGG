@@ -27,8 +27,12 @@ private:
 	GameObject* player;
 	std::vector<GameObject*> gameobjects;
 
+	const float deletionPeriod; // in milliseconds
+	float timePassed = 0;
+
 private:
 	void Set(int x, int y, char v);
+	void DeleteDeadGameObjects();
 	void Free();
 
 };

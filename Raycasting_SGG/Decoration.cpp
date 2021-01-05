@@ -12,7 +12,7 @@ GameObject::Type Decoration::getType() const
 
 Vector2 Decoration::Position() const
 {
-    return position;
+    return body.GetCenter();
 }
 
 graphics::Brush Decoration::GetBrush() const
@@ -32,6 +32,12 @@ Rectangle Decoration::GetBody() const
 
 void Decoration::Hit(const GameObject& other)
 {
+    switch (other.getType())
+    {
+    case GameObject::Type::ENTITY:
+        
+        break;
+    }
 }
 
 Vector2 Decoration::Direction() const

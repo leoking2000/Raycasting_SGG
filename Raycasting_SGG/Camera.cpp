@@ -176,7 +176,7 @@ void Camera::Render()
 
     for (const GameObject* obj : gameobjects)
     {
-        if (obj->getState() >= GameObject::State::SLEEPING)
+        if (obj->getState() == GameObject::State::ACTIVE)
         {
             float distance = obj->Position().GetDistance(player_pos);
             dists.emplace_back(std::pair<const GameObject*, float>(obj, distance));

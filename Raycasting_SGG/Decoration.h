@@ -5,11 +5,9 @@
 class Decoration : public GameObject
 {
 public:
-public:
 	Decoration(float xPos, float yPos, float size, float health, const std::string& texture)
 		:
-		position(xPos, yPos),
-		body(position, size, size),
+		body({ xPos, yPos }, size, size),
 		health(health),
 		texture(texture)
 	{
@@ -27,11 +25,10 @@ public:
 	void Update() override;
 
 private:
-	Vector2 position;
 	Rectangle body;
 	float health;
 	const std::string texture;
 
-	GameObject::State state = GameObject::State::SLEEPING;
+	GameObject::State state = GameObject::State::ACTIVE;
 	GameObject::Type type = GameObject::Type::ENTITY;
 };

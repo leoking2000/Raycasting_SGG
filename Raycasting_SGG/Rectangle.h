@@ -16,7 +16,7 @@ public:
 	{
 	}
 
-	bool isCollidingWith(const Rectangle_t<T> other) const
+	bool IntersectsWith(const Rectangle_t<T> other) const
 	{
 		return right > other.left && left < other.right
 			&& bottom > other.top && top < other.bottom;

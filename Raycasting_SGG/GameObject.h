@@ -12,9 +12,7 @@ public:
 	enum State
 	{
 		DEAD     = 0, // if it is dead it should be deleted from memory. 
-		INACTIVE = 1, // if it is inactive it should not be drawn or update.
-		SLEEPING = 2, // if it is sleeping it should not be updated.
-		ACTIVE   = 3  // if it is active all ok.
+		ACTIVE   = 1  // if it is active all ok.
 	};
 	// the type is used in order to have proper collision response and drawing.
 	enum Type

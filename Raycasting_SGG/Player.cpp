@@ -7,14 +7,14 @@ void Player::Update()
 
 	if (graphics::getKeyState(graphics::SCANCODE_UP))
 	{
-		position += direction * speed * (graphics::getDeltaTime() / 1000);
-		body.SetCenter(position);
+		Vector2 newPosition = body.GetCenter() + direction * speed * (graphics::getDeltaTime() / 1000);
+		body.SetCenter(newPosition);
 	}
 
 	if (graphics::getKeyState(graphics::SCANCODE_DOWN))
 	{
-		position += direction * (- 1)*speed * (graphics::getDeltaTime() / 1000);
-		body.SetCenter(position);
+		Vector2 newPosition = body.GetCenter() + direction * (-1) * speed * (graphics::getDeltaTime() / 1000);
+		body.SetCenter(newPosition);
 	}
 
 	if (graphics::getKeyState(graphics::SCANCODE_LEFT))
@@ -42,7 +42,7 @@ GameObject::Type Player::getType() const
 
 Vector2 Player::Position() const
 {
-	return position;
+	return body.GetCenter();
 }
 
 graphics::Brush Player::GetBrush() const
@@ -59,7 +59,12 @@ Rectangle Player::GetBody() const
 
 void Player::Hit(const GameObject& other)
 {
-
+	switch (other.getType())
+	{
+	case GameObject::Type::ENTITY:
+		
+		break;
+	}
 
 }
 

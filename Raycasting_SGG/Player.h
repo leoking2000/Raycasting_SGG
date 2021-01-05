@@ -6,9 +6,8 @@ class Player : public GameObject
 public:
 	Player(float xPos, float yPos, float xDir, float yDir, float speed,float rotationSpeed)
 		:
-		position(xPos,yPos),
 		direction(xDir, yDir),
-		body(position, 0.5f, 0.5f),
+		body({ xPos, yPos }, 0.5f, 0.5f),
 		speed(speed),
 		rotationSpeed(rotationSpeed)
 	{
@@ -26,7 +25,6 @@ public:
 	void Update() override;
 
 private:
-	Vector2 position;
 	Vector2 direction;
 	Rectangle body;
 	float speed;
