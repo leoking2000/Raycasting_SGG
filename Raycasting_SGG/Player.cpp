@@ -44,6 +44,7 @@ void Player::Update()
 	if (graphics::getKeyState(graphics::SCANCODE_SPACE))
 	{
 		graphics::playSound("assets//Audio//Pistol.wav", 1.0f);
+		if (item != nullptr) { item->OnUse(); }
 	}
 
 }
@@ -51,6 +52,16 @@ void Player::Update()
 void Player::Damage(float amount)
 {
 	health -= amount;
+}
+
+Item* Player::GetItem()
+{
+	return item;
+}
+
+void Player::SetItem(Item* item)
+{
+	this->item = item;
 }
 
 GameObject::State Player::getState() const
@@ -70,6 +81,8 @@ Vector2 Player::Position() const
 
 graphics::Brush Player::GetBrush() const
 {
+	if (item != nullptr) return item->GetBrush();
+
 	graphics::Brush br;
 
 	br.texture = "assets//Weapons//pistol_0.png";
@@ -98,6 +111,8 @@ void Player::Hit(GameObject& other)
 	case GameObject::COLLIDERTYPE::DYNAMIC:
 		body.ResolveCollisionDynamic(other.GetBodyRef());
 		break;
+	case GameObject::COLLIDERTYPE::TRIGGER:
+		if(item == nullptr) item = dynamic_cast<Item*>(&other);
 	}
 
 }

@@ -17,9 +17,10 @@ public:
 	// the type is used in order to have proper collision response and drawing.
 	enum COLLIDERTYPE
 	{
-		TRIGGER = 0,  // is a trigger or an sensors
-		STATIC  = 1,  // it does not move when a collition happens.
-		DYNAMIC = 2   // it moves
+		INACTIVE = 0,  // ignore the collider
+		TRIGGER  = 1,  // is a trigger or an sensors
+		STATIC   = 2,  // it does not move when a collition happens.
+		DYNAMIC  = 3   // it moves
 	};
 public:
 	virtual ~GameObject() {};
