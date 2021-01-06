@@ -36,6 +36,11 @@ void Player::Update()
 		direction.Normalize();
 	}
 
+	if (graphics::getKeyState(graphics::SCANCODE_SPACE))
+	{
+		graphics::playSound("assets//Audio//Pistol.wav", 1.0f);
+	}
+
 }
 
 GameObject::State Player::getState() const
@@ -56,6 +61,9 @@ Vector2 Player::Position() const
 graphics::Brush Player::GetBrush() const
 {
 	graphics::Brush br;
+
+	br.texture = "assets//Weapons//pistol_0.png";
+	br.outline_opacity = 0.0f;
 
 	return br;
 }

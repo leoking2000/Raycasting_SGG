@@ -9,9 +9,9 @@ Camera::Camera(int width)
 
     br.outline_opacity = 1.0f;
 
-    sky.fill_color[0] = 0.8f;
-    sky.fill_color[1] = 0.8f;
-    sky.fill_color[2] = 1.0f;
+    sky.fill_color[0] = 0.2f;
+    sky.fill_color[1] = 0.3f;
+    sky.fill_color[2] = 0.2f;
     sky.fill_opacity = 1.0f;
 }
 
@@ -37,7 +37,7 @@ void Camera::Render()
     const Level& pLevel = game->GetLevel();
 
     // for drawing what the player sees
-	const Vector2 player_pos = pLevel.GetPlayer()->Position();
+    const Vector2 player_pos = pLevel.GetPlayer()->Position();
 	const Vector2 player_dir = pLevel.GetPlayer()->Direction();
 	const Vector2 plane = { -player_dir.y, player_dir.x };
 
@@ -224,7 +224,8 @@ void Camera::Render()
         }
     }
 
-
+    // draw player item.
+    graphics::drawRect(width / 2.0f, height / 2.0f, width, height, pLevel.GetPlayer()->GetBrush());
     
     
 } // RenderSceneAt
