@@ -5,7 +5,7 @@ GameObject::State Decoration::getState() const
     return state;
 }
 
-GameObject::Type Decoration::getType() const
+GameObject::COLLIDERTYPE Decoration::getColliderType() const
 {
     return type;
 }
@@ -30,14 +30,27 @@ Circle Decoration::GetBody() const
     return body;
 }
 
-void Decoration::Hit(const GameObject& other)
+Circle& Decoration::GetBodyRef()
 {
-    switch (other.getType())
-    {
-    case GameObject::Type::ENTITY:
-        
-        break;
-    }
+    return body;
+}
+
+void Decoration::Hit(GameObject& other)
+{
+	switch (other.getColliderType())
+	{
+    case GameObject::COLLIDERTYPE::DYNAMIC:
+		if(type == GameObject::COLLIDERTYPE::DYNAMIC)
+        {
+            other.GetBodyRef().ResolveCollisionDynamic(body);
+        }
+        else
+        {
+            other.GetBodyRef().ResolveCollisionStatic(body);
+        }
+		break;
+	}
+
 }
 
 Vector2 Decoration::Direction() const

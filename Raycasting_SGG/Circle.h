@@ -29,6 +29,27 @@ public:
 		return position;
 	}
 
+	void ResolveCollisionStatic(const Circle_t<T>& other)
+	{
+		const Vector2 deltaCenter = position - other.position;
+		const float dis = deltaCenter.GetLength();
+
+		const float overlap = dis - radius - other.radius;
+
+		position -= deltaCenter.GetNormalized() * overlap;
+	}
+
+	void ResolveCollisionDynamic(Circle_t<T>& other)
+	{
+		const Vector2 deltaCenter = position - other.position;
+		const float dis = deltaCenter.GetLength();
+
+		const float overlap = dis - radius - other.radius;
+
+		position -= deltaCenter.GetNormalized() * (overlap * 0.5f);
+		other.position += deltaCenter.GetNormalized() * (overlap * 0.5f);
+	}
+
 	void SetCenter(const Vector2D_t<T> center)
 	{
 		position = center;

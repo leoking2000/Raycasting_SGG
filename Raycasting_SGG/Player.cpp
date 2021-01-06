@@ -48,7 +48,7 @@ GameObject::State Player::getState() const
 	return state;
 }
 
-GameObject::Type Player::getType() const
+GameObject::COLLIDERTYPE Player::getColliderType() const
 {
 	return type;
 }
@@ -73,16 +73,20 @@ Circle Player::GetBody() const
 	return body;
 }
 
-void Player::Hit(const GameObject& other)
+Circle& Player::GetBodyRef()
 {
-	switch (other.getType())
-	{
-	case GameObject::Type::ENTITY:
-		Vector2 moveDir = (body.GetCenter() - other.GetBody().GetCenter());
-		const float moveBy = body.GetRadious() + other.GetBody().GetRadious() - moveDir.GetLength();
+	return body;
+}
 
-		Vector2 newPosition = body.GetCenter() + moveDir.Normalize() * moveBy;
-		body.SetCenter(newPosition);
+void Player::Hit(GameObject& other)
+{
+	switch (other.getColliderType())
+	{
+	case GameObject::COLLIDERTYPE::STATIC:
+		body.ResolveCollisionStatic(other.GetBodyRef());
+		break;
+	case GameObject::COLLIDERTYPE::DYNAMIC:
+		body.ResolveCollisionDynamic(other.GetBodyRef());
 		break;
 	}
 

@@ -15,23 +15,25 @@ public:
 		ACTIVE   = 1  // if it is active all ok.
 	};
 	// the type is used in order to have proper collision response and drawing.
-	enum Type
+	enum COLLIDERTYPE
 	{
-		ENTITY,
-		ITEM,
-		PROJECTILE
+		TRIGGER = 0,  // is a trigger or an sensors
+		STATIC  = 1,  // it does not move when a collition happens.
+		DYNAMIC = 2   // it moves
 	};
 public:
 	virtual ~GameObject() {};
 
 	GameObject::State virtual getState() const = 0;
-	GameObject::Type virtual getType() const = 0;
+	GameObject::COLLIDERTYPE virtual getColliderType() const = 0;
 
 	Vector2 virtual Position() const = 0; // the position in level space.
 	graphics::Brush virtual GetBrush() const = 0; // info to how to draw the object.
 
 	Circle virtual GetBody() const = 0; // used for collition detection.
-	void virtual Hit(const GameObject& other) = 0; // used for collition response.
+	virtual Circle& GetBodyRef() = 0;
+
 	Vector2 virtual Direction() const = 0; // the direction in level space.
+	void virtual Hit(GameObject& other) = 0; // used for collition response.
 	void virtual Update() { };
 };

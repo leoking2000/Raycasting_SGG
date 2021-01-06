@@ -78,7 +78,7 @@ void Level::Load(const std::string& filename)
 				break;
 			case 'b':
 				Set(x, y, ' ');
-				gameobjects.emplace_back(new Decoration(x + 0.5f, y + 0.5f, 0.5f, 5.0f, std::string("assets//Decoration//barrel.png")));
+				gameobjects.emplace_back(new Decoration(x + 0.5f, y + 0.5f, 0.5f, 5.0f, std::string("assets//Decoration//barrel.png"), GameObject::COLLIDERTYPE::DYNAMIC));
 				break;
 			case ' ':
 				Set(x, y, ' ');

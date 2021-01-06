@@ -14,13 +14,15 @@ public:
 	}
 
 	GameObject::State getState() const override;
-	GameObject::Type getType() const override;
+	GameObject::COLLIDERTYPE getColliderType() const override;
 
 	Vector2 Position() const override; // the position in level space.
 	graphics::Brush GetBrush() const override; // info to how to draw the object.
 
 	Circle GetBody() const override; // used for collition detection.
-	void virtual Hit(const GameObject& other) override; // used for collition response.
+	Circle& GetBodyRef() override;
+
+	void virtual Hit(GameObject& other) override; // used for collition response.
 	Vector2 Direction() const override; // the direction in level space.
 	void Update() override;
 
@@ -31,6 +33,6 @@ private:
 	float rotationSpeed;
 	
 	GameObject::State state = GameObject::State::ACTIVE;
-	GameObject::Type type = GameObject::Type::ENTITY;
+	GameObject::COLLIDERTYPE type = GameObject::COLLIDERTYPE::DYNAMIC;
 };
 
