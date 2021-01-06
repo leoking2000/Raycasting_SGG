@@ -19,6 +19,7 @@ public:
 
 	const GameObject* const GetPlayer() const;
 	const std::vector<GameObject*>& GameObjects() const;
+	void AddGameObject(GameObject* go);
 
 private:
 	int width;

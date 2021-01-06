@@ -27,7 +27,7 @@ int Game::CanvasHeight() const
 	return canvasheight;
 }
 
-const Level& Game::GetLevel() const
+Level& Game::GetLevel()
 {
 	return level;
 }

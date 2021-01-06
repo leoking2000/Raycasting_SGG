@@ -2,7 +2,7 @@
 #bbbbb###bbbbbb   bbb     bbbb                     bbb#
 #     ###bb                                          b#
 #     ###   p    p    p         p    p    p    p     b#
-#     ###                                             #
+#  i  ###                                             #
 #     ###   p                                  p      #
 #     ###                                            b#
 #     ###b  p                                  p      #

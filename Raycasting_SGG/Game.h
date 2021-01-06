@@ -14,7 +14,7 @@ public:
 	//////////Getters Functions/////////////////////////////
 	int CanvasWidth() const;
 	int CanvasHeight() const;
-	const Level& GetLevel() const;
+	Level& GetLevel();
 	///////////////Special Functions//////////////////////
 	void Update();
 	void Draw();

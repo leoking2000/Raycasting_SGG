@@ -5,6 +5,7 @@
 
 #include "Player.h"
 #include "Decoration.h"
+#include "Weapon.h"
 
 Level::Level(const std::string& filename)
 	:
@@ -72,6 +73,10 @@ void Level::Load(const std::string& filename)
 				Set(x, y, ' ');
 				gameobjects.emplace_back(new Decoration(x + 0.5f, y + 0.5f, 0.5f, 100.0f, std::string("")));
 				break;
+			case 'i':
+				Set(x, y, ' ');
+				gameobjects.emplace_back(Weapon::Make_Pistol({ x + 0.5f, y + 0.5f }));
+				break;
 			case 'p':
 				Set(x, y, ' ');
 				gameobjects.emplace_back(new Decoration(x + 0.5f, y + 0.5f, 0.5f, 100.0f, std::string("assets//Decoration//pillar.png")));
@@ -92,17 +97,17 @@ void Level::Load(const std::string& filename)
 
 void Level::Update()
 {
-	for (GameObject* obj : gameobjects)
+	for (int i = 0; i < gameobjects.size(); i++)
 	{
-		if (obj->getState() != obj->ACTIVE) continue;
+		if (gameobjects[i]->getState() != gameobjects[i]->ACTIVE) continue;
 
-		obj->Update();
+		gameobjects[i]->Update();
 
 		for (GameObject* other : gameobjects)
 		{
-			if (obj != other && other->getState() == other->ACTIVE && obj->GetBody().IntersectsWith(other->GetBody()))
+			if (gameobjects[i] != other && other->getState() == other->ACTIVE && gameobjects[i]->GetBody().IntersectsWith(other->GetBody()))
 			{
-				obj->Hit(*other);
+				gameobjects[i]->Hit(*other);
 			}
 		}
 	}
@@ -170,4 +175,12 @@ const GameObject* const Level::GetPlayer() const
 const std::vector<GameObject*>& Level::GameObjects() const
 {
 	return gameobjects;
+}
+
+void Level::AddGameObject(GameObject* go)
+{
+	if (go != nullptr)
+	{
+		gameobjects.push_back(go);
+	}
 }

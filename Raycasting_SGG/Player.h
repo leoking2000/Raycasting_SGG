@@ -42,6 +42,9 @@ private:
 	float health;
 
 	Item* item = nullptr;
+
+	const float usePeriod = 500; // in milliseconds
+	float timePassed = 0;
 	
 	GameObject::State state = GameObject::State::ACTIVE;
 	GameObject::COLLIDERTYPE type = GameObject::COLLIDERTYPE::DYNAMIC;

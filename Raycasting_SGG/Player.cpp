@@ -41,10 +41,13 @@ void Player::Update()
 		direction.Normalize();
 	}
 
-	if (graphics::getKeyState(graphics::SCANCODE_SPACE))
+	if (graphics::getKeyState(graphics::SCANCODE_SPACE) && timePassed >= usePeriod)
 	{
-		graphics::playSound("assets//Audio//Pistol.wav", 1.0f);
-		if (item != nullptr) { item->OnUse(); }
+		if (item != nullptr) { item->OnUse(); timePassed = 0; }
+	}
+	else
+	{
+		if (timePassed <= usePeriod) timePassed += graphics::getDeltaTime();
 	}
 
 }
@@ -85,7 +88,7 @@ graphics::Brush Player::GetBrush() const
 
 	graphics::Brush br;
 
-	br.texture = "assets//Weapons//pistol_0.png";
+	br.fill_opacity = 0.0f;
 	br.outline_opacity = 0.0f;
 
 	return br;
@@ -112,7 +115,14 @@ void Player::Hit(GameObject& other)
 		body.ResolveCollisionDynamic(other.GetBodyRef());
 		break;
 	case GameObject::COLLIDERTYPE::TRIGGER:
-		if(item == nullptr) item = dynamic_cast<Item*>(&other);
+		if (item == nullptr)
+		{
+			item = dynamic_cast<Item*>(&other);
+			if (item != nullptr)
+			{
+				item->Onpickup(*this);
+			}
+		}
 	}
 
 }
