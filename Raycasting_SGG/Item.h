@@ -9,4 +9,5 @@ protected:
 	void virtual Onpickup() = 0;
 	void virtual OnUse() = 0;
 
+
 };

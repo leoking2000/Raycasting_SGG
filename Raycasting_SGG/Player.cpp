@@ -3,6 +3,11 @@
 
 void Player::Update()
 {
+	if (health <= 0) {
+		state = GameObject::State::DEAD;
+		return;
+	}
+
 	Game* game = reinterpret_cast<Game*>(graphics::getUserData());
 	const Level& level = game->GetLevel();
 
@@ -41,6 +46,11 @@ void Player::Update()
 		graphics::playSound("assets//Audio//Pistol.wav", 1.0f);
 	}
 
+}
+
+void Player::Damage(float amount)
+{
+	health -= amount;
 }
 
 GameObject::State Player::getState() const

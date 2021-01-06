@@ -60,4 +60,13 @@ Vector2 Decoration::Direction() const
 
 void Decoration::Update()
 {
+    if (health <= 0) {
+        state = GameObject::State::DEAD;
+        return;
+    }
+}
+
+void Decoration::Damage(float amount)
+{
+    health -= amount;
 }

@@ -1,8 +1,9 @@
 #pragma once
 #include "GameObject.h"
+#include "IHasHealth.h"
 #include <string>
 
-class Decoration : public GameObject
+class Decoration : public GameObject , IHasHealth
 {
 public:
 	Decoration(float xPos, float yPos, float size, float health, const std::string& texture, GameObject::COLLIDERTYPE type = GameObject::COLLIDERTYPE::STATIC)
@@ -26,6 +27,8 @@ public:
 	void virtual Hit(GameObject& other) override; // used for collition response.
 	Vector2 Direction() const override; // the direction in level space.
 	void Update() override;
+
+	void Damage(float amount) override;
 
 private:
 	Circle body;

@@ -65,7 +65,7 @@ void Level::Load(const std::string& filename)
 				break;
 			case 'P':
 				Set(x, y, ' ');
-				player = new Player(x + 0.5f, y + 0.5f, 0.0f, -1.0f,5.0f, 2.0f);
+				player = new Player(x + 0.5f, y + 0.5f, 0.0f, -1.0f, 100.0f, 5.0f, 2.0f);
 				gameobjects.emplace_back(player);
 				break;
 			case 'E':
