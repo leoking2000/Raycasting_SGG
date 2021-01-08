@@ -99,7 +99,7 @@ void Level::Update()
 {
 	for (int i = 0; i < gameobjects.size(); i++)
 	{
-		if (gameobjects[i]->getState() != gameobjects[i]->ACTIVE) continue;
+		if (gameobjects[i]->getState() == gameobjects[i]->DEAD) continue;
 
 		gameobjects[i]->Update();
 
