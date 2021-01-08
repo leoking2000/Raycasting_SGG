@@ -1,18 +1,17 @@
 #pragma once
-#include "ItemHolder.h"
-#include "Item.h"
+#include "GameObject.h"
 #include "IHasHealth.h"
+#include <string>
 
-class Player : public GameObject , IHasHealth , ItemHolder
+class Decoration : public GameObject , IHasHealth
 {
 public:
-	Player(float xPos, float yPos, float xDir, float yDir, float health, float speed, float rotationSpeed)
+	Decoration(float xPos, float yPos, float size, float health, const std::string& texture, GameObject::COLLIDERTYPE type = GameObject::COLLIDERTYPE::STATIC)
 		:
-		direction(xDir, yDir),
-		body({ xPos, yPos }, 0.25f),
-		speed(speed),
-		rotationSpeed(rotationSpeed),
-		health(health)
+		body({ xPos, yPos }, size),
+		health(health),
+		texture(texture),
+		type(type)
 	{
 	}
 
@@ -31,22 +30,11 @@ public:
 
 	void Damage(float amount) override;
 
-	Item* GetItem() override;
-	void SetItem(Item* item) override;
-
 private:
-	Vector2 direction;
 	Circle body;
-	float speed;
-	float rotationSpeed;
 	float health;
+	const std::string texture;
 
-	Item* item = nullptr;
-
-	const float usePeriod = 100; // in milliseconds
-	float timePassed = 0;
-	
 	GameObject::State state = GameObject::State::ACTIVE;
-	GameObject::COLLIDERTYPE type = GameObject::COLLIDERTYPE::DYNAMIC;
+	GameObject::COLLIDERTYPE type;
 };
-

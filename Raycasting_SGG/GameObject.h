@@ -1,46 +1,40 @@
 #pragma once
-#include "Rectangle.h"
+#include "Circle.h"
 #include "graphics.h"
-#include <string>
 
 /// <summary>
-/// This interface represents something that has a position in the Level(see Level.h).
-/// It is used by the camera to draw the Entities and Items.
+/// 
+/// 
 /// </summary>
 class GameObject
 {
 public:
-	GameObject(float xPos, float yPos, const std::string& texture)
-		:
-		position(xPos, yPos),
-		texture(texture),
-		body(position, 0.7f, 0.7f)
-	{}
-
-	Vector2 Position() const { return position; }
-	void SetPosition(const Vector2& newpos) { position = newpos; }
-
-	Rectangle getRectangle() const
+	enum State
 	{
-		return body;
-	}
-
-	// gives the info the camera needs to draw the object.
-	graphics::Brush virtual getBrush() const
+		DEAD     = 0, // if it is dead it should be deleted from memory. 
+		ACTIVE   = 1  // if it is active all ok.
+	};
+	// the type is used in order to have proper collision response and drawing.
+	enum COLLIDERTYPE
 	{
-		graphics::Brush sprite;
+		INACTIVE = 0,  // ignore the collider
+		TRIGGER  = 1,  // is a trigger or an sensors
+		STATIC   = 2,  // it does not move when a collition happens.
+		DYNAMIC  = 3   // it moves
+	};
+public:
+	virtual ~GameObject() {};
 
-		sprite.texture = texture;
-		sprite.outline_opacity = 0.0f;
+	GameObject::State virtual getState() const = 0;
+	GameObject::COLLIDERTYPE virtual getColliderType() const = 0;
 
-		return sprite;
-	}
+	Vector2 virtual Position() const = 0; // the position in level space.
+	graphics::Brush virtual GetBrush() const = 0; // info to how to draw the object.
 
-	void virtual Update() = 0;
-	
-protected:
-	Vector2 position; // level space position
-	std::string texture;
-	Rectangle body;
+	Circle virtual GetBody() const = 0; // used for collition detection.
+	virtual Circle& GetBodyRef() = 0;
 
+	Vector2 virtual Direction() const = 0; // the direction in level space.
+	void virtual Hit(GameObject& other) = 0; // used for collition response.
+	void virtual Update() { };
 };

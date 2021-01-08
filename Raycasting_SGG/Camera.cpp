@@ -5,15 +5,13 @@
 
 Camera::Camera(int width)
 {
-    Game* game = reinterpret_cast<Game*>(graphics::getUserData());
-
     p_zBuffer = new float[width];
 
     br.outline_opacity = 1.0f;
 
-    sky.fill_color[0] = 0.8f;
-    sky.fill_color[1] = 0.8f;
-    sky.fill_color[2] = 1.0f;
+    sky.fill_color[0] = 0.2f;
+    sky.fill_color[1] = 0.3f;
+    sky.fill_color[2] = 0.2f;
     sky.fill_opacity = 1.0f;
 }
 
@@ -39,11 +37,12 @@ void Camera::Render()
     const Level& pLevel = game->GetLevel();
 
     // for drawing what the player sees
-	const Vector2 player_pos = pLevel.GetPlayer().Position();
-	const Vector2 player_dir = pLevel.GetPlayer().Direction();
+    const Vector2 player_pos = pLevel.GetPlayer()->Position();
+	const Vector2 player_dir = pLevel.GetPlayer()->Direction();
 	const Vector2 plane = { -player_dir.y, player_dir.x };
 
-    graphics::drawRect(float(width) / 2.0f, float(width) / 6.0f, float(width), float(width) / 3.0f, sky); // draw sky
+    // draw sky
+    graphics::drawRect(float(width) / 2.0f, float(width) / 6.0f, float(width), float(width) / 3.0f, sky);
 
     // wall drawing
 	for (int column = 0; column < width; column++)
@@ -174,11 +173,16 @@ void Camera::Render()
     // sort game objects by distance by furthest to closest 
     std::vector<GameObject*> gameobjects = pLevel.GameObjects();
     std::vector<std::pair<const GameObject*,float>> dists(gameobjects.size() - 1);
+
     for (const GameObject* obj : gameobjects)
     {
-        float distance = obj->Position().GetDistance(player_pos);
-        dists.emplace_back(std::pair<const GameObject*, float>(obj, distance));
+        if (obj->getState() == GameObject::State::ACTIVE)
+        {
+            float distance = obj->Position().GetDistance(player_pos);
+            dists.emplace_back(std::pair<const GameObject*, float>(obj, distance));
+        }
     }
+
     std::sort(dists.begin(), dists.end(),
         [](const std::pair<const GameObject*, float>& lhs, const std::pair<const GameObject*, float>& rhs) 
         { 
@@ -216,11 +220,12 @@ void Camera::Render()
             int rectWidth = abs(int(height / (transform.y))); // Canvas size for x dir
             int rectHeight = std::abs(int(height / (transform.y))); // Canvas size for y dir
 
-            graphics::drawRect((float)rectScreenX, float(width) / 3.0f, (float)rectWidth*2.0f, (float)rectHeight*2.0f, pair.first->getBrush());
+            graphics::drawRect((float)rectScreenX, float(width) / 3.0f, (float)rectWidth*2.0f, (float)rectHeight*2.0f, pair.first->GetBrush());
         }
     }
 
-
+    // draw player item.
+    graphics::drawRect(width / 2.0f, height / 2.0f, width, height, pLevel.GetPlayer()->GetBrush());
     
     
 } // RenderSceneAt

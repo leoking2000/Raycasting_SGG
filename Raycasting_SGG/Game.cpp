@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "Enemy.h"
 
 Game::Game()
 	:
@@ -28,7 +27,7 @@ int Game::CanvasHeight() const
 	return canvasheight;
 }
 
-const Level& Game::GetLevel() const
+Level& Game::GetLevel()
 {
 	return level;
 }
@@ -56,7 +55,7 @@ void Game::Draw()
 	// DEBUG
 	if (graphics::getKeyState(graphics::SCANCODE_M))
 	{
-		const int scale = 20;
+		const int scale = 10;
 
 		/////////////////// minimap //////////////////
 		br.fill_color[0] = 0.7f;
@@ -79,16 +78,16 @@ void Game::Draw()
 		br.fill_color[1] = 0.0f;
 		br.fill_color[2] = 0.0f;
 		// player
-		Vector2 v = level.GetPlayer().Position() + level.GetPlayer().Direction();
-		graphics::drawDisk(level.GetPlayer().Position().x * scale, level.GetPlayer().Position().y * scale, 2, br);
+		Vector2 v = level.GetPlayer()->Position() + level.GetPlayer()->Direction();
+		graphics::drawDisk(level.GetPlayer()->Position().x * scale, level.GetPlayer()->Position().y * scale, 2, br);
 		br.outline_opacity = 1.0f;
-		graphics::drawLine(level.GetPlayer().Position().x * scale, level.GetPlayer().Position().y * scale,
+		graphics::drawLine(level.GetPlayer()->Position().x * scale, level.GetPlayer()->Position().y * scale,
 			v.x * scale, v.y * scale, br);
 
 		br.fill_opacity = 0.0f;
 		br.outline_opacity = 1.0f;
-		Rectangle body = level.GetPlayer().getRectangle();
-		graphics::drawRect(body.GetCenter().x * scale, body.GetCenter().y * scale, body.GetWidth() * scale, body.GetHeight() * scale, br);
+		Circle body = level.GetPlayer()->GetBody();
+		graphics::drawDisk(body.GetCenter().x * scale, body.GetCenter().y * scale, body.GetRadious() * scale, br);
 		br.fill_opacity = 1.0f;
 		br.outline_opacity = 0.0f;
 
@@ -98,8 +97,8 @@ void Game::Draw()
 
 			br.fill_opacity = 0.0f;
 			br.outline_opacity = 1.0f;
-			Rectangle body = obj->getRectangle();
-			graphics::drawRect(body.GetCenter().x * scale, body.GetCenter().y * scale, body.GetWidth() * scale, body.GetHeight() * scale, br);
+			Circle body = obj->GetBody();
+			graphics::drawDisk(body.GetCenter().x * scale, body.GetCenter().y * scale, body.GetRadious() * scale, br);
 			br.fill_opacity = 1.0f;
 			br.outline_opacity = 0.0f;
 		}
