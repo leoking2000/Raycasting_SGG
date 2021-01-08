@@ -4,7 +4,7 @@
 
 Bullet::Bullet(float xPos, float yPos, float xVel, float yVel, float damage)
     :
-    body({ xPos, yPos }, 0.05f),
+    body({ xPos, yPos }, 0.2f),
     velocity(xVel, yVel),
     amountOfDamage(damage)
 {
@@ -68,9 +68,9 @@ void Bullet::Update()
     Game* game = reinterpret_cast<Game*>(graphics::getUserData());
     const Level& level = game->GetLevel();
 
-    if (level.Get(int(position.x), int(position.y)) != ' ')
+    if (position.x < 0 && position.x > level.GetWidth() && position.y < 0 && position.y > level.GetHeight() || level.Get(int(position.x), int(position.y)) != ' ')
     {
-        state = GameObject::State::DEAD;
+       state = GameObject::State::DEAD;
     }
     else
     {

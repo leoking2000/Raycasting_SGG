@@ -55,7 +55,7 @@ void Game::Draw()
 	// DEBUG
 	if (graphics::getKeyState(graphics::SCANCODE_M))
 	{
-		const int scale = 20;
+		const int scale = 10;
 
 		/////////////////// minimap //////////////////
 		br.fill_color[0] = 0.7f;
