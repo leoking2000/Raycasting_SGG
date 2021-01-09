@@ -1,9 +1,8 @@
 #pragma once
-#include "GameObject.h"
 #include "IHasHealth.h"
 #include <string>
 
-class Decoration : public GameObject , IHasHealth
+class Decoration : public IHasHealth
 {
 public:
 	Decoration(float xPos, float yPos, float size, float health, const std::string& texture, GameObject::COLLIDERTYPE type = GameObject::COLLIDERTYPE::STATIC)

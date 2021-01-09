@@ -51,7 +51,7 @@ Vector2 Bullet::Direction() const
 
 void Bullet::Hit(GameObject& other)
 {
-    Decoration* target = dynamic_cast<Decoration*>(&other);
+    IHasHealth* target = dynamic_cast<IHasHealth*>(&other);
 
 
     if (target != nullptr )

@@ -1,9 +1,8 @@
 #pragma once
 #include "ItemHolder.h"
-#include "Item.h"
 #include "IHasHealth.h"
 
-class Player : public GameObject , IHasHealth , ItemHolder
+class Player : public IHasHealth , ItemHolder
 {
 public:
 	Player(float xPos, float yPos, float xDir, float yDir, float health, float speed, float rotationSpeed)
