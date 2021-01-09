@@ -1,4 +1,5 @@
 #include "Camera.h"
+
 #include <algorithm>
 #include <utility>
 #include "Game.h"

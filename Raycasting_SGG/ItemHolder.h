@@ -1,8 +1,7 @@
 #pragma once
+#include "Item.h"
 
-class Item;
-
-class ItemHolder
+class ItemHolder : public GameObject
 {
 public:
 	virtual Item* GetItem() = 0;
