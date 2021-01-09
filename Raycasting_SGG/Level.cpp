@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Decoration.h"
 #include "Weapon.h"
+#include "Enemy.h"
 
 Level::Level(const std::string& filename)
 	:
@@ -66,12 +67,12 @@ void Level::Load(const std::string& filename)
 				break;
 			case 'P':
 				Set(x, y, ' ');
-				player = new Player(x + 0.5f, y + 0.5f, 0.0f, -1.0f, 100.0f, 10.0f, 2.0f);
+				player = new Player(x + 0.5f, y + 0.5f, 0.0f, 1.0f, 2000.0f, 10.0f, 2.0f);
 				gameobjects.emplace_back(player);
 				break;
 			case 'E':
 				Set(x, y, ' ');
-				gameobjects.emplace_back(new Decoration(x + 0.5f, y + 0.5f, 0.5f, 100.0f, std::string("")));
+				gameobjects.emplace_back(Enemy::Make_Ghost(x + 0.5f, y + 0.5f));
 				break;
 			case 'i':
 				Set(x, y, ' ');
@@ -79,11 +80,11 @@ void Level::Load(const std::string& filename)
 				break;
 			case 'p':
 				Set(x, y, ' ');
-				gameobjects.emplace_back(new Decoration(x + 0.5f, y + 0.5f, 0.5f, 100.0f, std::string("assets//Decoration//pillar.png")));
+				gameobjects.emplace_back(new Decoration(x + 0.5f, y + 0.5f, 0.5f, 100.0f, std::string("assets//Entities//pillar.png")));
 				break;
 			case 'b':
 				Set(x, y, ' ');
-				gameobjects.emplace_back(new Decoration(x + 0.5f, y + 0.5f, 0.5f, 5.0f, std::string("assets//Decoration//barrel.png")));
+				gameobjects.emplace_back(new Decoration(x + 0.5f, y + 0.5f, 0.5f, 5.0f, std::string("assets//Entities//barrel.png")));
 				break;
 			case ' ':
 				Set(x, y, ' ');

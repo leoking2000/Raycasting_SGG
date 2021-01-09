@@ -3,11 +3,6 @@
 
 void Player::Update()
 {
-	if (health <= 0) {
-		state = GameObject::State::DEAD;
-		return;
-	}
-
 	Game* game = reinterpret_cast<Game*>(graphics::getUserData());
 	const Level& level = game->GetLevel();
 
@@ -55,6 +50,9 @@ void Player::Update()
 void Player::Damage(float amount)
 {
 	health -= amount;
+	if (health <= 0) {
+		state = GameObject::State::DEAD;
+	}
 }
 
 GameObject::State Player::getState() const

@@ -28,7 +28,7 @@ Vector2 Bullet::Position() const
 graphics::Brush Bullet::GetBrush() const
 {
     graphics::Brush br;
-    br.fill_opacity = 0.0f;
+    br.texture = "assets//Entities//Bullet.png";
     br.outline_opacity = 0.0f;
 
     return br;
