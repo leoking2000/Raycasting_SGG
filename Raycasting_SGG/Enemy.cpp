@@ -2,18 +2,19 @@
 #include "Game.h"
 #include "Weapon.h"
 
-Enemy::Enemy(float xPos, float yPos, float health, float speed,const std::string& texture)
+Enemy::Enemy(float xPos, float yPos, float health, float speed,const std::string& texture, GameObject::COLLIDERTYPE type)
 	:
 	body({ xPos, yPos }, 0.5f),
 	speed(speed),
 	health(health),
-	texture(texture)
+	texture(texture),
+	type(type)
 {
 }
 
 Enemy* Enemy::Make_Ghost(float xPos, float yPos)
 {
-	return new Enemy(xPos, yPos, 500.0f, 1.0f, std::string("assets\\Enemies\\Ghosts_Red0.png"));
+	return new Enemy(xPos, yPos, 500.0f, 1.0f, std::string("assets\\Enemies\\Ghosts_Red0.png"), GameObject::COLLIDERTYPE::TRIGGER);
 }
 
 GameObject::State Enemy::getState() const

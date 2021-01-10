@@ -23,7 +23,7 @@ public:
 	void Damage(float amount) override;
 
 private:
-	Enemy(float xPos, float yPos, float health, float speed, const std::string& texture);
+	Enemy(float xPos, float yPos, float health, float speed, const std::string& texture, GameObject::COLLIDERTYPE type);
 
 	Circle body;
 	float speed;
