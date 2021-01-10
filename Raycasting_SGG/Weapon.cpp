@@ -2,23 +2,31 @@
 #include "Bullet.h"
 #include "Game.h"
 
-Weapon::Weapon(float xPos, float yPos, float damage)
+Weapon::Weapon(float xPos, float yPos, float damage, TextureAnimator animator_idle, TextureAnimator animator_fire)
 	:
-	position(xPos, yPos),
-    body(position, 0.25),
-    damage(damage)
+    body({xPos, yPos}, 0.25),
+    damage(damage),
+    animator_idle(animator_idle),
+    animator_fire(animator_fire)
 {
-
 }
 
 Weapon* Weapon::Make_Pistol(const Vector2& pos)
 {
-	return new Weapon(pos.x, pos.y, 20);
+    std::vector<std::string> idle;
+    idle.emplace_back("assets//Weapons//pistol_0.png");
+    idle.emplace_back("assets//Weapons//pistol_1.png");
+    idle.emplace_back("assets//Weapons//pistol_2.png");
+
+    std::vector<std::string> fire;
+    fire.emplace_back("assets//Weapons//pistol_3.png");
+    //fire.emplace_back("assets//Weapons//pistol_4.png");
+
+	return new Weapon(pos.x, pos.y, 20, TextureAnimator(idle,300.0f,true), TextureAnimator(fire, 300.0f,false));
 }
 
 void Weapon::Onpickup(GameObject& in_user)
 {
-	isOnGround = false;
 	user = &in_user;
 }
 
@@ -33,6 +41,8 @@ void Weapon::OnUse()
     level.AddGameObject(new Bullet(pos.x, pos.y, vel.x, vel.y, damage));
 
     graphics::playSound("assets\\Audio\\Pistol.wav", 1.0f);
+    use = true;
+    animator_fire.reset();
 }
 
 GameObject::State Weapon::getState() const
@@ -47,16 +57,23 @@ GameObject::COLLIDERTYPE Weapon::getColliderType() const
 
 Vector2 Weapon::Position() const
 {
-    if (user != nullptr) return user->Position();
-    return position;
+    return body.GetCenter();
 }
 
 graphics::Brush Weapon::GetBrush() const
 {
     graphics::Brush br;
-
-    br.texture = "assets//Weapons//pistol_0.png";
     br.outline_opacity = 0.0f;
+
+    if (user == nullptr)
+    {
+        br.texture = "assets//Weapons//pistol_0.png";
+    }
+    else
+    {
+        br.texture = use ? animator_fire.GetTexture() : animator_idle.GetTexture();
+    }
+
 
     return br;
 }
@@ -78,6 +95,18 @@ void Weapon::Hit(GameObject& other)
 
 void Weapon::Update()
 {
+    if (user != nullptr) body.SetCenter(user->Position());
+
+    if (use == false)
+    {
+        animator_idle.Tick();
+    }
+    else
+    {
+        animator_fire.Tick();
+        use = !animator_fire.IsOver();
+    }
+ 
 }
 
 Vector2 Weapon::Direction() const

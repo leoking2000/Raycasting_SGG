@@ -39,7 +39,7 @@ private:
 
 	Item* item = nullptr;
 
-	const float usePeriod = 100; // in milliseconds
+	const float usePeriod = 300; // in milliseconds
 	float timePassed = 0;
 	
 	GameObject::State state = GameObject::State::ACTIVE;
