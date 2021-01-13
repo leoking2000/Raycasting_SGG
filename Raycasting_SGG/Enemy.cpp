@@ -14,7 +14,7 @@ Enemy::Enemy(float xPos, float yPos, float health, float speed,const std::string
 
 Enemy* Enemy::Make_Ghost(float xPos, float yPos)
 {
-	return new Enemy(xPos, yPos, 500.0f, 1.0f, std::string("assets\\Enemies\\Ghosts_Red0.png"), GameObject::COLLIDERTYPE::TRIGGER);
+	return new Enemy(xPos, yPos, 500.0f, 2.0f, std::string("assets\\Enemies\\Ghosts_Red0.png"), GameObject::COLLIDERTYPE::TRIGGER);
 }
 
 GameObject::State Enemy::getState() const

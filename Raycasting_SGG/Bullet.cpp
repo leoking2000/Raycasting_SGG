@@ -64,7 +64,7 @@ void Bullet::Hit(GameObject& other)
 
 void Bullet::Update()
 {
-    Vector2 position = body.GetCenter() + velocity * graphics::getDeltaTime() / 1000;
+    Vector2 position = body.GetCenter() + velocity * (graphics::getDeltaTime() / 1000);
     Game* game = reinterpret_cast<Game*>(graphics::getUserData());
     const Level& level = game->GetLevel();
 

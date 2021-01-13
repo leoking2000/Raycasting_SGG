@@ -42,7 +42,10 @@ void Player::Update()
 	}
 	else
 	{
-		if (timePassed <= usePeriod) timePassed += graphics::getDeltaTime();
+		if (timePassed < usePeriod)
+		{
+			timePassed += graphics::getDeltaTime();
+		}	
 	}
 
 }

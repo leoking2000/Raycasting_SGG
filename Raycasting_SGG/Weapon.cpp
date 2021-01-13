@@ -35,7 +35,7 @@ void Weapon::OnUse()
     Game* game = reinterpret_cast<Game*>(graphics::getUserData());
     Level& level = game->GetLevel();
 
-    Vector2 pos = user->Position();
+    Vector2 pos = user->Position() + user->Direction();
     Vector2 vel = user->Direction() * 20;
 
     level.AddGameObject(new Bullet(pos.x, pos.y, vel.x, vel.y, damage));
