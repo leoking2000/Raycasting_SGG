@@ -3,11 +3,6 @@
 
 void Player::Update()
 {
-	if (health <= 0) {
-		state = GameObject::State::DEAD;
-		return;
-	}
-
 	Game* game = reinterpret_cast<Game*>(graphics::getUserData());
 	const Level& level = game->GetLevel();
 
@@ -47,7 +42,10 @@ void Player::Update()
 	}
 	else
 	{
-		if (timePassed <= usePeriod) timePassed += graphics::getDeltaTime();
+		if (timePassed < usePeriod)
+		{
+			timePassed += graphics::getDeltaTime();
+		}	
 	}
 
 }
@@ -55,16 +53,9 @@ void Player::Update()
 void Player::Damage(float amount)
 {
 	health -= amount;
-}
-
-Item* Player::GetItem()
-{
-	return item;
-}
-
-void Player::SetItem(Item* item)
-{
-	this->item = item;
+	if (health <= 0) {
+		state = GameObject::State::DEAD;
+	}
 }
 
 GameObject::State Player::getState() const

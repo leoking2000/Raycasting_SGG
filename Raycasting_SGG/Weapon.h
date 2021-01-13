@@ -1,6 +1,6 @@
 #pragma once
 #include "Item.h"
-
+#include "TextureAnimator.h"
 
 class Weapon : public Item
 {
@@ -24,14 +24,15 @@ public:
 	void OnUse() override;
 
 private:
-	Weapon(float xPos, float yPos, float damage);
+	Weapon(float xPos, float yPos, float damage, TextureAnimator animator_idle, TextureAnimator animator_fire);
 
-	Vector2 position;
 	Circle body;
-	bool isOnGround = true;
 	GameObject* user = nullptr;
-
 	float damage;
+
+	bool use = false;
+	TextureAnimator animator_idle;
+	TextureAnimator animator_fire;
 
 	GameObject::State state = GameObject::State::ACTIVE;
 	GameObject::COLLIDERTYPE type = GameObject::COLLIDERTYPE::TRIGGER;

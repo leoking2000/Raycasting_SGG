@@ -1,6 +1,6 @@
 #pragma once
 #include "Camera.h"
-//#include "GameSettings.h"
+#include "Level.h"
 
 // a class to hold the game state and logic
 class Game

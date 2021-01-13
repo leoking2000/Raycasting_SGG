@@ -28,7 +28,7 @@ Vector2 Bullet::Position() const
 graphics::Brush Bullet::GetBrush() const
 {
     graphics::Brush br;
-    br.fill_opacity = 0.0f;
+    br.texture = "assets//Entities//Bullet.png";
     br.outline_opacity = 0.0f;
 
     return br;
@@ -51,7 +51,7 @@ Vector2 Bullet::Direction() const
 
 void Bullet::Hit(GameObject& other)
 {
-    Decoration* target = dynamic_cast<Decoration*>(&other);
+    IHasHealth* target = dynamic_cast<IHasHealth*>(&other);
 
 
     if (target != nullptr )
@@ -64,7 +64,7 @@ void Bullet::Hit(GameObject& other)
 
 void Bullet::Update()
 {
-    Vector2 position = body.GetCenter() + velocity * graphics::getDeltaTime() / 1000;
+    Vector2 position = body.GetCenter() + velocity * (graphics::getDeltaTime() / 1000);
     Game* game = reinterpret_cast<Game*>(graphics::getUserData());
     const Level& level = game->GetLevel();
 

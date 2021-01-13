@@ -1,18 +1,11 @@
 #pragma once
 #include "IHasHealth.h"
-#include <string>
+#include <string.h>
 
-class Decoration : public IHasHealth
+class Enemy : public IHasHealth
 {
 public:
-	Decoration(float xPos, float yPos, float size, float health, const std::string& texture, GameObject::COLLIDERTYPE type = GameObject::COLLIDERTYPE::STATIC)
-		:
-		body({ xPos, yPos }, size),
-		health(health),
-		texture(texture),
-		type(type)
-	{
-	}
+	static Enemy* Make_Ghost(float xPos, float yPos);
 
 	GameObject::State getState() const override;
 	GameObject::COLLIDERTYPE getColliderType() const override;
@@ -30,10 +23,14 @@ public:
 	void Damage(float amount) override;
 
 private:
+	Enemy(float xPos, float yPos, float health, float speed, const std::string& texture, GameObject::COLLIDERTYPE type);
+
 	Circle body;
+	float speed;
 	float health;
-	const std::string texture;
+	std::string texture;
 
 	GameObject::State state = GameObject::State::ACTIVE;
-	GameObject::COLLIDERTYPE type;
+	GameObject::COLLIDERTYPE type = GameObject::COLLIDERTYPE::DYNAMIC;
 };
+

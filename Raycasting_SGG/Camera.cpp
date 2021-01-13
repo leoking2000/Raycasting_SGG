@@ -1,4 +1,5 @@
 #include "Camera.h"
+
 #include <algorithm>
 #include <utility>
 #include "Game.h"
@@ -39,7 +40,7 @@ void Camera::Render()
     // for drawing what the player sees
     const Vector2 player_pos = pLevel.GetPlayer()->Position();
 	const Vector2 player_dir = pLevel.GetPlayer()->Direction();
-	const Vector2 plane = { -player_dir.y, player_dir.x };
+	const Vector2 plane = { -player_dir.y , player_dir.x };
 
     // draw sky
     graphics::drawRect(float(width) / 2.0f, float(width) / 6.0f, float(width), float(width) / 3.0f, sky);
@@ -142,9 +143,9 @@ void Camera::Render()
         {
             
         case '#':  
-            br.outline_color[0] = 0.2f;
-            br.outline_color[1] = 0.8f;
-            br.outline_color[2] = 0.8f;
+            br.outline_color[0] = 0.7f;
+            br.outline_color[1] = 0.7f;
+            br.outline_color[2] = 0.7f;
             break;
 
         case 'R':  br.outline_color[0] = 1.0f; br.outline_color[1] = 0.0f; br.outline_color[2] = 0.0f; break;
@@ -217,15 +218,11 @@ void Camera::Render()
         //4) ZBuffer, with perpendicular distance
         if (transform.y > 0 && rectScreenX > 0 && rectScreenX < width && transform.y < p_zBuffer[rectScreenX])
         {
-            int rectWidth = abs(int(height / (transform.y))); // Canvas size for x dir
+            int rectWidth = std::abs(int(height / (transform.y))); // Canvas size for x dir
             int rectHeight = std::abs(int(height / (transform.y))); // Canvas size for y dir
 
             graphics::drawRect((float)rectScreenX, float(width) / 3.0f, (float)rectWidth*2.0f, (float)rectHeight*2.0f, pair.first->GetBrush());
         }
-    }
-
-    // draw player item.
-    graphics::drawRect(width / 2.0f, height / 2.0f, width, height, pLevel.GetPlayer()->GetBrush());
-    
+    }  
     
 } // RenderSceneAt

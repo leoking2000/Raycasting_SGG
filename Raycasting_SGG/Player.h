@@ -1,15 +1,14 @@
 #pragma once
-#include "ItemHolder.h"
-#include "Item.h"
 #include "IHasHealth.h"
+#include "Item.h"
 
-class Player : public GameObject , IHasHealth , ItemHolder
+class Player : public IHasHealth
 {
 public:
 	Player(float xPos, float yPos, float xDir, float yDir, float health, float speed, float rotationSpeed)
 		:
 		direction(xDir, yDir),
-		body({ xPos, yPos }, 0.25f),
+		body({ xPos, yPos }, 0.5f),
 		speed(speed),
 		rotationSpeed(rotationSpeed),
 		health(health)
@@ -31,9 +30,6 @@ public:
 
 	void Damage(float amount) override;
 
-	Item* GetItem() override;
-	void SetItem(Item* item) override;
-
 private:
 	Vector2 direction;
 	Circle body;
@@ -43,7 +39,7 @@ private:
 
 	Item* item = nullptr;
 
-	const float usePeriod = 100; // in milliseconds
+	const float usePeriod = 300; // in milliseconds
 	float timePassed = 0;
 	
 	GameObject::State state = GameObject::State::ACTIVE;
