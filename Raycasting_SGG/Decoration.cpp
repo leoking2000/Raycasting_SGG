@@ -70,3 +70,8 @@ void Decoration::Damage(float amount)
 {
     health -= amount;
 }
+
+float Decoration::GetHealth() const
+{
+    return health;
+}

@@ -58,6 +58,11 @@ void Player::Damage(float amount)
 	}
 }
 
+float Player::GetHealth() const
+{
+	return health;
+}
+
 GameObject::State Player::getState() const
 {
 	return state;

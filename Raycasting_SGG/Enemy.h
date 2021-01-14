@@ -21,6 +21,7 @@ public:
 	void Update() override;
 
 	void Damage(float amount) override;
+	float GetHealth() const override;
 
 private:
 	Enemy(float xPos, float yPos, float health, float speed, const std::string& texture, GameObject::COLLIDERTYPE type);

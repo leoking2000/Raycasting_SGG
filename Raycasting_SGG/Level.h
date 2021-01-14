@@ -1,6 +1,6 @@
 #pragma once
 #include "Array2D.h"
-#include "GameObject.h"
+#include "IHasHealth.h"
 #include <string>
 #include <vector>
 
@@ -24,7 +24,7 @@ public:
 	int GetWidth() const;
 	int GetHeight() const;
 
-	const GameObject* const GetPlayer() const;
+	const IHasHealth* const GetPlayer() const;
 	const std::vector<GameObject*>& GameObjects() const;
 	void AddGameObject(GameObject* go);
 
@@ -32,7 +32,7 @@ private:
 	int width;
 	int height;
 	Array2D<char> arr;
-	GameObject* player;
+	IHasHealth* player;
 	std::vector<GameObject*> gameobjects;
 
 	const float deletionPeriod; // in milliseconds

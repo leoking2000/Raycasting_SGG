@@ -85,3 +85,8 @@ void Enemy::Damage(float amount)
 		state = GameObject::State::DEAD;
 	}
 }
+
+float Enemy::GetHealth() const
+{
+	return health;
+}

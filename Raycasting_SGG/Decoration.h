@@ -28,6 +28,7 @@ public:
 	void Update() override;
 
 	void Damage(float amount) override;
+	float GetHealth() const override;
 
 private:
 	Circle body;

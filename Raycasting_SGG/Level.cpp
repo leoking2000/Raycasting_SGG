@@ -66,7 +66,7 @@ bool Level::Load(const std::string& filename)
 				break;
 			case 'P':
 				Set(x, y, ' ');
-				player = new Player(x + 0.5f, y + 0.5f, 0.0f, 1.0f, 2000.0f, 10.0f, 2.0f);
+				player = new Player(x + 0.5f, y + 0.5f, 0.0f, 1.0f, 1000.0f, 10.0f, 2.0f);
 				gameobjects.emplace_back(player);
 				break;
 			case 'E':
@@ -177,7 +177,7 @@ int Level::GetHeight() const
 	return height;
 }
 
-const GameObject* const Level::GetPlayer() const
+const IHasHealth* const Level::GetPlayer() const
 {
 	return player;
 }
