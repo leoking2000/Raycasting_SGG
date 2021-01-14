@@ -77,6 +77,10 @@ bool Level::Load(const std::string& filename)
 				Set(x, y, ' ');
 				gameobjects.emplace_back(Weapon::Make_Pistol({ x + 0.5f, y + 0.5f }));
 				break;
+			case 'l':
+				Set(x, y, ' ');
+				gameobjects.emplace_back(new Decoration(x + 0.5f, y + 0.5f, 0.5f, 1.0f, "assets//Entities//greenlight.png", GameObject::COLLIDERTYPE::INACTIVE));
+				break;
 			case 'p':
 				Set(x, y, ' ');
 				gameobjects.emplace_back(new Decoration(x + 0.5f, y + 0.5f, 0.5f, 100.0f, std::string("assets//Entities//pillar.png")));
@@ -103,9 +107,15 @@ Event Level::Update()
 
 		gameobjects[i]->Update();
 
+		if (gameobjects[i]->getColliderType() == GameObject::COLLIDERTYPE::INACTIVE)
+		{
+			continue;
+		}
+
 		for (GameObject* other : gameobjects)
 		{
-			if (gameobjects[i] != other && other->getState() == other->ACTIVE && gameobjects[i]->GetBody().IntersectsWith(other->GetBody()))
+			if (gameobjects[i] != other && other->getState() == other->ACTIVE && other->getColliderType() != GameObject::COLLIDERTYPE::INACTIVE
+				&& gameobjects[i]->GetBody().IntersectsWith(other->GetBody()))
 			{
 				gameobjects[i]->Hit(*other);
 			}

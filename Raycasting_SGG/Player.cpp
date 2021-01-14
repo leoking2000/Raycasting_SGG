@@ -119,6 +119,7 @@ void Player::Hit(GameObject& other)
 				item->Onpickup(*this);
 			}
 		}
+		break;
 	}
 
 }
