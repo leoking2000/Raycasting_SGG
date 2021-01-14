@@ -29,4 +29,14 @@ private:
 	Level level;
 	Camera camera;
 
+private:
+	enum State
+	{
+		MAINMENU,
+		LEVELSELECTOR,
+		CONTROLS,
+		PLAY,
+		DEATHSCREEN,
+		WINSCREEN,
+	};
 };
