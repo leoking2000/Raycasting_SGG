@@ -21,22 +21,28 @@ public:
 	void ResizeCanvas(int w, int h);
 private:
 	//////////Game Functions/////////////////////////////
-	
-private:
-	//////////////Game variables/////////////////////////
-	int canvaswidth = 1600;
-	int canvasheight = 900;
-	Level level;
-	Camera camera;
 
+	void UpdateMainMenu();
+	void DrawMainMenu();
+
+	void UpdatePlayScreen();
+	void DrawPlayScreen();
 private:
 	enum State
 	{
 		MAINMENU,
 		LEVELSELECTOR,
-		CONTROLS,
-		PLAY,
+		PLAYSCREEN,
 		DEATHSCREEN,
 		WINSCREEN,
 	};
+private:
+	//////////////Game variables/////////////////////////
+
+	int canvaswidth = 1600;
+	int canvasheight = 900;
+	Level level;
+	Camera camera;
+
+	Game::State state = Game::State::MAINMENU;
 };

@@ -8,11 +8,10 @@
 #include "Weapon.h"
 #include "Enemy.h"
 
-Level::Level(const std::string& filename)
+Level::Level()
 	:
 	deletionPeriod(2000) // 2000 because it seems ok.
 {
-	Load(filename);
 }
 
 Level::~Level()
@@ -20,13 +19,13 @@ Level::~Level()
 	Free();
 }
 
-void Level::Load(const std::string& filename)
+bool Level::Load(const std::string& filename)
 {
 	Free();
 
 	std::ifstream file(filename);
 
-	assert(file);
+	if (!file) return false;
 
 	std::string map = ""; 
 	int w = 0;
@@ -93,10 +92,10 @@ void Level::Load(const std::string& filename)
 		}
 	}
 	file.close();
-
+	return true;
 }
 
-void Level::Update()
+Event Level::Update()
 {
 	for (int i = 0; i < gameobjects.size(); i++)
 	{
@@ -113,6 +112,12 @@ void Level::Update()
 		}
 	}
 
+	if (player->getState() == GameObject::State::DEAD)
+	{
+		Free();
+		return Event::PlayerDies;
+	}
+
 	if (deletionPeriod <= timePassed)
 	{
 		DeleteDeadGameObjects();
@@ -122,6 +127,8 @@ void Level::Update()
 	{
 		timePassed += graphics::getDeltaTime();
 	}
+
+	return Event::NOTHING;
 }
 
 char Level::Get(int x, int y) const
@@ -154,6 +161,8 @@ void Level::Free()
 		delete obj;
 		obj = nullptr;
 	}
+
+	player = nullptr;
 
 	gameobjects.clear();
 }

@@ -2,7 +2,7 @@
 
 Game::Game()
 	:
-	level("assets//Levels//TestLevel.txt"),
+	level(),
 	camera(1600)
 {
 	graphics::Brush background;
@@ -34,7 +34,28 @@ Level& Game::GetLevel()
 
 void Game::Update()
 {
-	level.Update();
+	switch (state)
+	{
+	case Game::State::MAINMENU:
+		UpdateMainMenu();
+		break;
+	case Game::State::PLAYSCREEN:
+		UpdatePlayScreen();
+		break;
+	}
+}
+
+void Game::Draw()
+{
+	switch (state)
+	{
+	case Game::State::MAINMENU:
+		DrawMainMenu();
+		break;
+	case Game::State::PLAYSCREEN:
+		DrawPlayScreen();
+	}
+
 }
 
 void Game::ResizeCanvas(int w, int h)
@@ -46,7 +67,37 @@ void Game::ResizeCanvas(int w, int h)
 	graphics::setCanvasSize((float)canvaswidth, (float)canvasheight);
 }
 
-void Game::Draw()
+/////////////////////////////////////////////////////////////////////
+
+void Game::UpdateMainMenu()
+{
+	if (graphics::getKeyState(graphics::SCANCODE_SPACE))
+	{
+		state = Game::State::PLAYSCREEN;
+		level.Load("assets//Levels//TestLevel.txt");
+	}
+}
+
+void Game::DrawMainMenu()
+{
+	graphics::Brush br;
+	br.outline_opacity = 0.0f;
+
+	graphics::drawText(canvaswidth / 2.0f - 250.0f, canvasheight / 2.0f, 50.0f, "Press space to Start", br);
+}
+
+void Game::UpdatePlayScreen()
+{
+	Event event = level.Update();
+
+	switch (event)
+	{
+	case Event::PlayerDies:
+		state = Game::State::MAINMENU;
+	}
+}
+
+void Game::DrawPlayScreen()
 {
 	camera.Render();
 
@@ -114,5 +165,4 @@ void Game::Draw()
 
 	double frameTime = graphics::getDeltaTime() / 1000.0; //frameTime is the time this frame has taken, in seconds
 	graphics::drawText(0.0f, 50.0f, 50.0f, std::to_string(int(1.0 / frameTime)), br);
-
 }

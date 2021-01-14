@@ -4,14 +4,21 @@
 #include <string>
 #include <vector>
 
+enum Event
+{
+	NOTHING,
+	PlayerDies,
+	PlayerWin
+};
+
 class Level
 {
 public:
-	Level(const std::string& filename);
+	Level();
 	~Level();
 
-	void Load(const std::string& filename);
-	void Update();
+	bool Load(const std::string& filename);
+	Event Update();
 
 	char Get(int x, int y) const;
 	int GetWidth() const;
