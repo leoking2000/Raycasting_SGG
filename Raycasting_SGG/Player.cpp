@@ -6,7 +6,7 @@ void Player::Update()
 	Game* game = reinterpret_cast<Game*>(graphics::getUserData());
 	const Level& level = game->GetLevel();
 
-	if (graphics::getKeyState(graphics::SCANCODE_UP))
+	if (graphics::getKeyState(graphics::SCANCODE_UP) || graphics::getKeyState(graphics::SCANCODE_W))
 	{
 		Vector2 newPosition = body.GetCenter() + direction * speed * (graphics::getDeltaTime() / 1000);
 		if (level.Get(int(newPosition.x), int(newPosition.y)) == ' ')
@@ -15,7 +15,7 @@ void Player::Update()
 		}	
 	}
 
-	if (graphics::getKeyState(graphics::SCANCODE_DOWN))
+	if (graphics::getKeyState(graphics::SCANCODE_DOWN) || graphics::getKeyState(graphics::SCANCODE_S))
 	{
 		Vector2 newPosition = body.GetCenter() + direction * (-1) * speed * (graphics::getDeltaTime() / 1000);
 		if (level.Get(int(newPosition.x), int(newPosition.y)) == ' ')
@@ -24,13 +24,13 @@ void Player::Update()
 		}
 	}
 
-	if (graphics::getKeyState(graphics::SCANCODE_LEFT))
+	if (graphics::getKeyState(graphics::SCANCODE_LEFT) || graphics::getKeyState(graphics::SCANCODE_A))
 	{
 		direction.Rotate(-rotationSpeed * graphics::getDeltaTime() / 1000);
 		direction.Normalize();
 	}
 
-	if (graphics::getKeyState(graphics::SCANCODE_RIGHT))
+	if (graphics::getKeyState(graphics::SCANCODE_RIGHT) || graphics::getKeyState(graphics::SCANCODE_D))
 	{
 		direction.Rotate(rotationSpeed * graphics::getDeltaTime() / 1000);
 		direction.Normalize();

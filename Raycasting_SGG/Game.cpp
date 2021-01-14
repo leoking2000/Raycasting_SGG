@@ -51,7 +51,7 @@ void Game::Draw()
 	camera.Render();
 
 	// draw player item.
-	graphics::drawRect(canvaswidth / 2.0f, canvasheight - 250, 500, 500, level.GetPlayer()->GetBrush());
+	graphics::drawRect(canvaswidth / 2.0f, canvasheight - 300, 600, 600, level.GetPlayer()->GetBrush());
 
 	graphics::Brush br;
 
