@@ -6,6 +6,9 @@ class Camera
 public:
 	Camera(int width);
 	~Camera();
+	Camera(const Camera& g) = delete;
+	Camera& operator=(const Camera& g) = delete;
+
 	void Render();
 	void ResizeBuffer();
 private:

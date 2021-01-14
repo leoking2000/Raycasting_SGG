@@ -16,6 +16,8 @@ class Level
 public:
 	Level();
 	~Level();
+	Level(const Level& g) = delete;
+	Level& operator=(const Level& g) = delete;
 
 	bool Load(const std::string& filename);
 	Event Update();
