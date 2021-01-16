@@ -152,6 +152,7 @@
     <ClCompile Include="Decoration.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Key.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="IHasHealth.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="Key.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Circle.h" />

@@ -27,6 +27,7 @@ Weapon* Weapon::Make_Pistol(const Vector2& pos)
 void Weapon::Onpickup(GameObject& in_user)
 {
 	user = &in_user;
+    type = GameObject::COLLIDERTYPE::INACTIVE;
     graphics::playSound("assets\\Audio\\Pickup.wav", 1.0f);
 }
 
@@ -67,7 +68,7 @@ graphics::Brush Weapon::GetBrush() const
 
     if (user == nullptr)
     {
-        br.texture = "assets//Weapons//pistol_0.png";
+        br.texture = "assets//Weapons//pistol_g.png";
     }
     else
     {

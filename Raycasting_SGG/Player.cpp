@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Game.h"
+#include "Key.h"
 
 void Player::Update()
 {
@@ -122,8 +123,8 @@ void Player::Hit(GameObject& other)
 			{
 				item->Onpickup(*this);
 			}
+			break;
 		}
-		break;
 	}
 
 }

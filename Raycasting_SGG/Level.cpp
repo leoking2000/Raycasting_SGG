@@ -7,6 +7,7 @@
 #include "Decoration.h"
 #include "Weapon.h"
 #include "Enemy.h"
+#include "Key.h"
 
 Level::Level()
 	:
@@ -51,6 +52,7 @@ bool Level::Load(const std::string& filename)
 
 	width = w;
 	height = h + 1;
+	numOfkeys = 0;
 
 	arr = Array2D<char>(height, width);
 	for (int y = 0; y < height; y++)
@@ -89,6 +91,11 @@ bool Level::Load(const std::string& filename)
 				Set(x, y, ' ');
 				gameobjects.emplace_back(Decoration::Make_Barrel(x + 0.5f, y + 0.5f));
 				break;
+			case 'k':
+				Set(x, y, ' ');
+				gameobjects.emplace_back(Key::Make_key(x + 0.5f, y + 0.5f));
+				numOfkeys++;
+				break;
 			case ' ':
 				Set(x, y, ' ');
 				break;
@@ -126,6 +133,12 @@ Event Level::Update()
 	{
 		Free();
 		return Event::PlayerDies;
+	}
+
+	if (numOfkeys == 0)
+	{
+		Free();
+		return Event::PlayerWin;
 	}
 
 	if (deletionPeriod <= timePassed)
@@ -169,7 +182,6 @@ void Level::Free()
 	for (GameObject* obj : gameobjects)
 	{
 		delete obj;
-		obj = nullptr;
 	}
 
 	player = nullptr;
@@ -203,4 +215,14 @@ void Level::AddGameObject(GameObject* go)
 	{
 		gameobjects.push_back(go);
 	}
+}
+
+void Level::KeyPickUp()
+{
+	numOfkeys--;
+}
+
+int Level::GetNumOfkeys() const
+{
+	return numOfkeys;
 }

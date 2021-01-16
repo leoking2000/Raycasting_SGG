@@ -13,7 +13,7 @@ public:
 
 	static Decoration* Make_Pillar(float x, float y)
 	{
-		return new Decoration(x, y, 0.5f, 5.0f, std::string("assets//Entities//pillar.png"),
+		return new Decoration(x, y, 0.5f, 200.0f, std::string("assets//Entities//pillar.png"),
 			std::string(""));
 	}
 

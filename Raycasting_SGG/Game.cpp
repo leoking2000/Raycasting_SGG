@@ -3,7 +3,7 @@
 Game::Game()
 	:
 	level(),
-	camera(1600)
+	camera(canvaswidth)
 {
 	graphics::Brush background;
 	background.fill_color[0] = 0.2f;
@@ -94,6 +94,7 @@ void Game::UpdatePlayScreen()
 
 	switch (event)
 	{
+	case Event::PlayerWin:
 	case Event::PlayerDies:
 		state = Game::State::MAINMENU;
 	}
@@ -110,12 +111,15 @@ void Game::DrawPlayScreen()
 
 	// draw player item.
 	graphics::drawRect(canvaswidth / 2.0f, canvasheight - 300, 600, 600, level.GetPlayer()->GetBrush());
+
 	// draw Health
 	graphics::drawText(10.0f, 60.0f, 50.0f, "Health:", ui);
 	graphics::drawText(190.0f, 60.0f, 50.0f, std::to_string((int)level.GetPlayer()->GetHealth()), ui);
 	
+	// draw num of keys
+	graphics::drawText(10.0f, 120.0f, 50.0f, "Keys:", ui);
+	graphics::drawText(190.0f, 120.0f, 50.0f, std::to_string((int)level.GetNumOfkeys()), ui);
 
-	//graphics::drawRect()
 
 	// DEBUG
 	if (graphics::getKeyState(graphics::SCANCODE_M))

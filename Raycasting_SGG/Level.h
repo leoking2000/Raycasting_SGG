@@ -28,7 +28,10 @@ public:
 
 	const IHasHealth* const GetPlayer() const;
 	const std::vector<GameObject*>& GameObjects() const;
+
 	void AddGameObject(GameObject* go);
+	void KeyPickUp();
+	int GetNumOfkeys() const;
 
 private:
 	int width;
@@ -39,6 +42,8 @@ private:
 
 	const float deletionPeriod; // in milliseconds
 	float timePassed = 0;
+
+	int numOfkeys = 0;
 
 private:
 	void Set(int x, int y, char v);

@@ -69,6 +69,9 @@
     <ClCompile Include="TextureAnimator.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Key.cpp">
+      <Filter>Source Files\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -115,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="TextureAnimator.h">
       <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Key.h">
+      <Filter>Header Files\Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
