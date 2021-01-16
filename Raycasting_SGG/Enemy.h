@@ -8,7 +8,7 @@ public:
 	static Enemy* Make_Ghost(float xPos, float yPos)
 	{
 		return new Enemy(xPos, yPos, 500.0f, 2.0f,
-			std::string("assets\\Enemies\\ghost1.png"), std::string("assets\\Audio\\ghost_hurt.wav"), GameObject::COLLIDERTYPE::TRIGGER);
+			std::string("assets\\Enemies\\ghost2.png"), std::string("assets\\Audio\\ghost_hurt.wav"), GameObject::COLLIDERTYPE::TRIGGER);
 	}
 
 	GameObject::State getState() const override;

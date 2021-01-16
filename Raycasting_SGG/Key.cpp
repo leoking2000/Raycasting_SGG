@@ -7,9 +7,10 @@ Key::Key(float xPos, float yPos)
 	body({ xPos, yPos }, 0.5f)
 {
 }
+
 void Key::Hit(GameObject& other)
 {
-	if (dynamic_cast<Player*>(&other)) { return; }
+	if (dynamic_cast<Player*>(&other) == nullptr) { return; }
 
 	if (pickedUp == false)
 	{
