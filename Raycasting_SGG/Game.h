@@ -44,5 +44,7 @@ private:
 	Level level;
 	Camera camera;
 
+	int levelNumber = 1;
+
 	Game::State state = Game::State::MAINMENU;
 };

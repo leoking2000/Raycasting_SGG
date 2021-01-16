@@ -75,8 +75,11 @@ void Game::UpdateMainMenu()
 {
 	if (graphics::getKeyState(graphics::SCANCODE_SPACE))
 	{
+		if (level.Load(std::string("assets//Levels//Level1.txt")) == false)
+		{
+			return;
+		}
 		state = Game::State::PLAYSCREEN;
-		level.Load("assets//Levels//TestLevel.txt");
 	}
 }
 
@@ -95,8 +98,15 @@ void Game::UpdatePlayScreen()
 	switch (event)
 	{
 	case Event::PlayerWin:
+		levelNumber++;
+		if (level.Load(std::string("assets//Levels//Level") + std::to_string(levelNumber) + ".txt") == false)
+		{
+			state = Game::State::MAINMENU;
+		}
+		break;
 	case Event::PlayerDies:
 		state = Game::State::MAINMENU;
+		break;
 	}
 }
 
@@ -110,7 +120,7 @@ void Game::DrawPlayScreen()
 	graphics::Brush ui;
 
 	// draw player item.
-	graphics::drawRect(canvaswidth / 2.0f, canvasheight - 300, 600, 600, level.GetPlayer()->GetBrush());
+	graphics::drawRect(canvaswidth / 2.0f, canvasheight - 300.0f, 600, 600, level.GetPlayer()->GetBrush());
 
 	// draw Health
 	graphics::drawText(10.0f, 60.0f, 50.0f, "Health:", ui);
