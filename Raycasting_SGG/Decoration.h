@@ -5,13 +5,22 @@
 class Decoration : public IHasHealth
 {
 public:
-	Decoration(float xPos, float yPos, float size, float health, const std::string& texture, GameObject::COLLIDERTYPE type = GameObject::COLLIDERTYPE::STATIC)
-		:
-		body({ xPos, yPos }, size),
-		health(health),
-		texture(texture),
-		type(type)
+	static Decoration* Make_Barrel(float x,float y )
 	{
+		return new Decoration(x, y, 0.5f, 5.0f, std::string("assets//Entities//barrel.png"),
+			std::string("assets\\Audio\\mixkit-wood-hard-hit-2182.wav"));
+	}
+
+	static Decoration* Make_Pillar(float x, float y)
+	{
+		return new Decoration(x, y, 0.5f, 5.0f, std::string("assets//Entities//pillar.png"),
+			std::string(""));
+	}
+
+	static Decoration* Make_GreenLight(float x, float y)
+	{
+		return new Decoration(x + 0.5f, y + 0.5f, 0.5f, 1.0f, std::string("assets//Entities//greenlight.png"),
+			std::string(""), GameObject::COLLIDERTYPE::INACTIVE);
 	}
 
 	GameObject::State getState() const override;
@@ -31,9 +40,22 @@ public:
 	float GetHealth() const override;
 
 private:
+	Decoration(float xPos, float yPos, float size, float health,
+		const std::string& texture, const std::string& soundHit, GameObject::COLLIDERTYPE type = GameObject::COLLIDERTYPE::STATIC)
+		:
+		body({ xPos, yPos }, size),
+		health(health),
+		texture(texture),
+		soundHit(soundHit),
+		type(type)
+	{
+	}
+
+
 	Circle body;
 	float health;
 	const std::string texture;
+	const std::string soundHit;
 
 	GameObject::State state = GameObject::State::ACTIVE;
 	GameObject::COLLIDERTYPE type;

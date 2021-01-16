@@ -20,7 +20,6 @@ Weapon* Weapon::Make_Pistol(const Vector2& pos)
 
     std::vector<std::string> fire;
     fire.emplace_back("assets//Weapons//pistol_3.png");
-    //fire.emplace_back("assets//Weapons//pistol_4.png");
 
 	return new Weapon(pos.x, pos.y, 20, TextureAnimator(idle,300.0f,true), TextureAnimator(fire, 300.0f,false));
 }
@@ -28,6 +27,7 @@ Weapon* Weapon::Make_Pistol(const Vector2& pos)
 void Weapon::Onpickup(GameObject& in_user)
 {
 	user = &in_user;
+    graphics::playSound("assets\\Audio\\Pickup.wav", 1.0f);
 }
 
 void Weapon::OnUse()

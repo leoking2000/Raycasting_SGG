@@ -48,6 +48,7 @@ void Decoration::Hit(GameObject& other)
         {
             other.GetBodyRef().ResolveCollisionStatic(body);
         }
+        graphics::playSound(soundHit, 1.0f);
 		break;
 	}
 
@@ -60,15 +61,15 @@ Vector2 Decoration::Direction() const
 
 void Decoration::Update()
 {
-    if (health <= 0) {
-        state = GameObject::State::DEAD;
-        return;
-    }
+
 }
 
 void Decoration::Damage(float amount)
 {
     health -= amount;
+    if (health <= 0) {
+        state = GameObject::State::DEAD;
+    }
 }
 
 float Decoration::GetHealth() const

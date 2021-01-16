@@ -79,15 +79,15 @@ bool Level::Load(const std::string& filename)
 				break;
 			case 'l':
 				Set(x, y, ' ');
-				gameobjects.emplace_back(new Decoration(x + 0.5f, y + 0.5f, 0.5f, 1.0f, "assets//Entities//greenlight.png", GameObject::COLLIDERTYPE::INACTIVE));
+				gameobjects.emplace_back(Decoration::Make_GreenLight(x + 0.5f, y + 0.5f));
 				break;
 			case 'p':
 				Set(x, y, ' ');
-				gameobjects.emplace_back(new Decoration(x + 0.5f, y + 0.5f, 0.5f, 100.0f, std::string("assets//Entities//pillar.png")));
+				gameobjects.emplace_back(Decoration::Make_Pillar(x + 0.5f, y + 0.5f));
 				break;
 			case 'b':
 				Set(x, y, ' ');
-				gameobjects.emplace_back(new Decoration(x + 0.5f, y + 0.5f, 0.5f, 5.0f, std::string("assets//Entities//barrel.png")));
+				gameobjects.emplace_back(Decoration::Make_Barrel(x + 0.5f, y + 0.5f));
 				break;
 			case ' ':
 				Set(x, y, ' ');

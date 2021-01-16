@@ -55,7 +55,11 @@ void Player::Damage(float amount)
 	health -= amount;
 	if (health <= 0) {
 		state = GameObject::State::DEAD;
+		graphics::playSound("assets\\Audio\\Player_Dies.wav", 1.0f);
+		return;
 	}
+
+	graphics::playSound("assets\\Audio\\Human_Hurt.wav", 1.0f);
 }
 
 float Player::GetHealth() const

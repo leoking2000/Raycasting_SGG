@@ -11,6 +11,8 @@ Game::Game()
 	background.fill_color[2] = 0.2f;
 	graphics::setWindowBackground(background);
 	graphics::setFont("assets//SUBWT___.ttf");
+
+	graphics::playMusic("assets\\Audio\\music.mp3", 1.0f, true);
 }
 
 Game::~Game()

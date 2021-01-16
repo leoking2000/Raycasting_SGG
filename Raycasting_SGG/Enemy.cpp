@@ -2,19 +2,16 @@
 #include "Game.h"
 #include "Weapon.h"
 
-Enemy::Enemy(float xPos, float yPos, float health, float speed,const std::string& texture, GameObject::COLLIDERTYPE type)
+Enemy::Enemy(float xPos, float yPos, float health, float speed,
+	const std::string& texture, const std::string& soundHurt, GameObject::COLLIDERTYPE type)
 	:
 	body({ xPos, yPos }, 0.5f),
 	speed(speed),
 	health(health),
 	texture(texture),
+	soundHurt(soundHurt),
 	type(type)
 {
-}
-
-Enemy* Enemy::Make_Ghost(float xPos, float yPos)
-{
-	return new Enemy(xPos, yPos, 500.0f, 2.0f, std::string("assets\\Enemies\\Ghosts_Red0.png"), GameObject::COLLIDERTYPE::TRIGGER);
 }
 
 GameObject::State Enemy::getState() const
@@ -84,6 +81,8 @@ void Enemy::Damage(float amount)
 	{
 		state = GameObject::State::DEAD;
 	}
+
+	graphics::playSound(soundHurt, 0.3f);
 }
 
 float Enemy::GetHealth() const
