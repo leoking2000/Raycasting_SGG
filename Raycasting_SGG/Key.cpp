@@ -4,7 +4,7 @@
 
 Key::Key(float xPos, float yPos)
 	:
-	body({ xPos, yPos }, 0.5f)
+	body({ xPos, yPos }, 0.25f)
 {
 }
 
