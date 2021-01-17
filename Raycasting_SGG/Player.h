@@ -18,14 +18,14 @@ public:
 	GameObject::State getState() const override;
 	GameObject::COLLIDERTYPE getColliderType() const override;
 
-	Vector2 Position() const override; // the position in level space.
-	graphics::Brush GetBrush() const override; // info to how to draw the object.
+	Vector2 Position() const override;
+	graphics::Brush GetBrush() const override;
 
-	Circle GetBody() const override; // used for collition detection.
+	Circle GetBody() const override;
 	Circle& GetBodyRef() override;
 
-	void virtual Hit(GameObject& other) override; // used for collition response.
-	Vector2 Direction() const override; // the direction in level space.
+	void virtual Hit(GameObject& other) override;
+	Vector2 Direction() const override;
 	void Update() override;
 
 	void Damage(float amount) override;

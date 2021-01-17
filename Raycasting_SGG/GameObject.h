@@ -14,7 +14,7 @@ public:
 		DEAD     = 0, // if it is dead it should be deleted from memory. 
 		ACTIVE   = 1  // if it is active all ok.
 	};
-	// the type is used in order to have proper collision response and drawing.
+	// the type is used in order to have proper collision response.
 	enum COLLIDERTYPE
 	{
 		INACTIVE = 0,  // ignore the collider
