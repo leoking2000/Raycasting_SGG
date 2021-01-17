@@ -14,12 +14,12 @@ Game::Game()
 
 	graphics::playMusic("assets\\Audio\\music.mp3", 1.0f, true);
 
-	main_menu.Insert("Play", new LevelLoader(1));
+	main_menu.Insert("Play", new LevelLoader(1, *this));
 	main_menu.Insert("Level Selector", new Back(state));
 
-	level_selector.Insert("Level 1", new LevelLoader(1));
-	level_selector.Insert("Level 2", new LevelLoader(2));
-	level_selector.Insert("Level 3", new LevelLoader(3));
+	level_selector.Insert("Level 1", new LevelLoader(1, *this));
+	level_selector.Insert("Level 2", new LevelLoader(2, *this));
+	level_selector.Insert("Level 3", new LevelLoader(3, *this));
 	level_selector.Insert("Back", new Back(state));
 }
 
