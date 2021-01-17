@@ -22,16 +22,19 @@ void Menu::Insert(const std::string& name, Ifunctor* fun)
 void Menu::SelectUp()
 {
 	selectedIndex = (selectedIndex - 1) % options.size();
+	graphics::playSound("assets\\Audio\\MenuToggle.wav", 1.0f);
 }
 
 void Menu::SelectDown()
 {
 	selectedIndex = (selectedIndex + 1) % options.size();
+	graphics::playSound("assets\\Audio\\MenuToggle.wav", 1.0f);
 }
 
 void Menu::Åxecute()
 {
 	options[selectedIndex]->Do();
+	graphics::playSound("assets\\Audio\\MenuToggle.wav", 1.0f);
 }
 
 void Menu::Draw()
