@@ -24,6 +24,7 @@ void resize(int new_w, int new_h)
 
 int main()
 {
+	// code to detect memory leaks
 	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);
 	_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDERR);
 	_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_FILE);
@@ -34,6 +35,11 @@ int main()
     graphics::createWindow(1600, 900, "Game");
 	graphics::setCanvasScaleMode(graphics::CANVAS_SCALE_FIT);
 	graphics::setCanvasSize((float)1600, (float)900);
+
+	/*
+	*  we create the game with new because 
+	*  we want to delete before we check for memory leaks
+	*/
 
 	Game* game = new Game();
 
@@ -48,6 +54,7 @@ int main()
 
 	delete game;
 
+	// code to detect memory leaks
 	_CrtDumpMemoryLeaks();
     return 0;
 }

@@ -7,22 +7,19 @@
 class Game
 {
 public:
-	///////////Initialization and Destruction///////////
 	Game();
 	~Game();
 	Game(const Game& g) = delete;
 	Game& operator=(const Game& g) = delete;
-	//////////Getters Functions/////////////////////////////
+
 	int CanvasWidth() const;
 	int CanvasHeight() const;
 	Level& GetLevel();
-	///////////////Special Functions//////////////////////
+
 	void Update();
 	void Draw();
 	void ResizeCanvas(int w, int h);
 private:
-	//////////Game Functions/////////////////////////////
-
 	void LoadLevel(int num);
 
 	void UpdatePlayScreen();
@@ -59,8 +56,6 @@ private:
 		void Do() override;
 	};
 private:
-	//////////////Game variables/////////////////////////
-
 	int canvaswidth = 1600;
 	int canvasheight = 900;
 	Level level;
@@ -79,7 +74,7 @@ private:
 	// for Menu managment
 	bool upArrowPress = false;
 	bool downArrowPress = false;
-	bool spaceEnder = false;
+	bool spacePress = false;
 
 	Game::State state = Game::State::MAINMENU;
 };

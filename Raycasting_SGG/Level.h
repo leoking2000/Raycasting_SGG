@@ -4,6 +4,9 @@
 #include <string>
 #include <vector>
 
+/*
+* this is used to pass info to the game update
+*/
 enum Event
 {
 	NOTHING,
@@ -20,9 +23,13 @@ public:
 	Level& operator=(const Level& g) = delete;
 
 	bool Load(const std::string& filename);
+
+	/*
+	* updates the game objects and return what happend in the player.
+	*/
 	Event Update();
 
-	char Get(int x, int y) const;
+	char Get(int x, int y) const; // this is used to check if in x, y there is a wall.
 	int GetWidth() const;
 	int GetHeight() const;
 
@@ -30,6 +37,7 @@ public:
 	const std::vector<GameObject*>& GameObjects() const;
 
 	void AddGameObject(GameObject* go);
+
 	void KeyPickUp();
 	int GetNumOfkeys() const;
 

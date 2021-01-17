@@ -151,7 +151,7 @@ void Game::DrawPlayScreen()
 		}
 	}
 
-	// DEBUG
+	// DEBUG it just Draws the level when m is presed.
 	if (graphics::getKeyState(graphics::SCANCODE_M))
 	{
 		graphics::Brush map;
@@ -244,14 +244,14 @@ void Game::ManageMenu(Menu& menu)
 		downArrowPress = graphics::getKeyState(graphics::SCANCODE_DOWN);
 	}
 
-	if (graphics::getKeyState(graphics::SCANCODE_RETURN) && spaceEnder == false)
+	if (graphics::getKeyState(graphics::SCANCODE_RETURN) && spacePress == false)
 	{
 		menu.Åxecute();
-		spaceEnder = true;
+		spacePress = true;
 	}
 	else
 	{
-		spaceEnder = graphics::getKeyState(graphics::SCANCODE_RETURN);
+		spacePress = graphics::getKeyState(graphics::SCANCODE_RETURN);
 	}
 }
 

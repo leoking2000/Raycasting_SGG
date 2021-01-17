@@ -1,6 +1,11 @@
 #pragma once
 #include <assert.h>
 
+/*
+* this is a class i made in october and it on my github leoking2000.
+* send me an email for proof
+*/
+
 template<typename T>
 class Array2D
 {
