@@ -81,9 +81,6 @@
     <ClCompile Include="Menu.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
-    <ClCompile Include="LevelLoader.cpp">
-      <Filter>Source Files\UI</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -139,9 +136,6 @@
     </ClInclude>
     <ClInclude Include="Ifunctors.h">
       <Filter>Header Files\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelLoader.h">
-      <Filter>Header Files\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

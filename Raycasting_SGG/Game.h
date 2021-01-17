@@ -20,9 +20,10 @@ public:
 	void Update();
 	void Draw();
 	void ResizeCanvas(int w, int h);
-	void LoadLevel(int num);
 private:
 	//////////Game Functions/////////////////////////////
+
+	void LoadLevel(int num);
 
 	void UpdatePlayScreen();
 	void DrawPlayScreen();
@@ -44,6 +45,17 @@ private:
 
 	public:
 		Back(Game::State& state);
+		void Do() override;
+	};
+
+	class LevelLoader : public Ifunctor
+	{
+	private:
+		const int levelNum;
+		Game& game;
+	public:
+		LevelLoader(int levelNum, Game& game);
+
 		void Do() override;
 	};
 private:

@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "LevelLoader.h"
 
 Game::Game()
 	:
@@ -274,4 +273,17 @@ void Game::Back::Do()
 		state = Game::State::MAINMENU;
 		break;
 	}
+}
+
+
+Game::LevelLoader::LevelLoader(int levelNum, Game& game)
+	:
+	levelNum(levelNum),
+	game(game)
+{
+}
+
+void Game::LevelLoader::Do()
+{
+	game.LoadLevel(levelNum);
 }
