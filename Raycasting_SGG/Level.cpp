@@ -63,9 +63,6 @@ bool Level::Load(const std::string& filename)
 
 			switch (c)
 			{
-			case '#':
-				Set(x, y, '#');
-				break;
 			case 'P':
 				Set(x, y, ' ');
 				player = new Player(x + 0.5f, y + 0.5f, 0.0f, 1.0f, 1000.0f, 10.0f, 2.0f);
@@ -96,9 +93,8 @@ bool Level::Load(const std::string& filename)
 				gameobjects.emplace_back(Key::Make_key(x + 0.5f, y + 0.5f));
 				numOfkeys++;
 				break;
-			case ' ':
-				Set(x, y, ' ');
-				break;
+			default:
+				Set(x, y, c);
 			}
 		}
 	}

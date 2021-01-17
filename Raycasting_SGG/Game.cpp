@@ -20,6 +20,9 @@ Game::Game()
 	level_selector.Insert("Level 1", new LevelLoader(1, *this));
 	level_selector.Insert("Level 2", new LevelLoader(2, *this));
 	level_selector.Insert("Level 3", new LevelLoader(3, *this));
+	level_selector.Insert("Level 4", new LevelLoader(4, *this));
+	level_selector.Insert("Level 5", new LevelLoader(5, *this));
+	level_selector.Insert("Level 6", new LevelLoader(6, *this));
 	level_selector.Insert("Back", new Back(state));
 }
 
