@@ -1,13 +1,15 @@
 MainMenu....ok
 LevelSelector...0k
 ui current level.....ok
+ui key remaining.....ok
+
+
 win/loose screen
-ui key remaining.....ok 
 music off
 
 more decorators
-more levels 10
 
+more levels 10
 comment clean up the code
 
 How to play txt

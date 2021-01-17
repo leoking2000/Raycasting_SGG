@@ -71,10 +71,12 @@ private:
 
 	int levelNumber = 1;
 
+	// for the level pop up at hte beggining of a level
 	const float levelShowPeriod = 5000; // in milliseconds
 	float timePassed = 0;
 	bool showed = false;
 
+	// for Menu managment
 	bool upArrowPress = false;
 	bool downArrowPress = false;
 	bool spaceEnder = false;

@@ -120,7 +120,6 @@ void Game::DrawPlayScreen()
 {
 	camera.Render();
 
-
 	/// UI ///
 	
 	graphics::Brush ui;
