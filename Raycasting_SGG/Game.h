@@ -1,6 +1,7 @@
 #pragma once
 #include "Camera.h"
 #include "Level.h"
+#include "Menu.h"
 
 // a class to hold the game state and logic
 class Game
@@ -19,22 +20,31 @@ public:
 	void Update();
 	void Draw();
 	void ResizeCanvas(int w, int h);
+	void LoadLevel(int num);
 private:
 	//////////Game Functions/////////////////////////////
 
-	void UpdateMainMenu();
-	void DrawMainMenu();
-
 	void UpdatePlayScreen();
 	void DrawPlayScreen();
+
+	void ManageMenu(Menu& menu);
+	
 private:
 	enum State
 	{
 		MAINMENU,
 		LEVELSELECTOR,
 		PLAYSCREEN,
-		DEATHSCREEN,
-		WINSCREEN,
+	};
+private:
+	class Back : public Ifunctor
+	{
+	private:
+		Game::State& state;
+
+	public:
+		Back(Game::State& state);
+		void Do() override;
 	};
 private:
 	//////////////Game variables/////////////////////////
@@ -44,7 +54,18 @@ private:
 	Level level;
 	Camera camera;
 
+	Menu main_menu;
+	Menu level_selector;
+
 	int levelNumber = 1;
+
+	const float levelShowPeriod = 5000; // in milliseconds
+	float timePassed = 0;
+	bool showed = false;
+
+	bool upArrowPress = false;
+	bool downArrowPress = false;
+	bool spaceEnder = false;
 
 	Game::State state = Game::State::MAINMENU;
 };

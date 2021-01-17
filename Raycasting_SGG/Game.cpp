@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "LevelLoader.h"
 
 Game::Game()
 	:
@@ -13,6 +14,14 @@ Game::Game()
 	graphics::setFont("assets//SUBWT___.ttf");
 
 	graphics::playMusic("assets\\Audio\\music.mp3", 1.0f, true);
+
+	main_menu.Insert("Play", new LevelLoader(1));
+	main_menu.Insert("Level Selector", new Back(state));
+
+	level_selector.Insert("Level 1", new LevelLoader(1));
+	level_selector.Insert("Level 2", new LevelLoader(2));
+	level_selector.Insert("Level 3", new LevelLoader(3));
+	level_selector.Insert("Back", new Back(state));
 }
 
 Game::~Game()
@@ -39,7 +48,10 @@ void Game::Update()
 	switch (state)
 	{
 	case Game::State::MAINMENU:
-		UpdateMainMenu();
+		ManageMenu(main_menu);
+		break;
+	case Game::State::LEVELSELECTOR:
+		ManageMenu(level_selector);
 		break;
 	case Game::State::PLAYSCREEN:
 		UpdatePlayScreen();
@@ -52,10 +64,14 @@ void Game::Draw()
 	switch (state)
 	{
 	case Game::State::MAINMENU:
-		DrawMainMenu();
+		main_menu.Draw();
+		break;
+	case Game::State::LEVELSELECTOR:
+		level_selector.Draw();
 		break;
 	case Game::State::PLAYSCREEN:
 		DrawPlayScreen();
+		break;
 	}
 
 }
@@ -69,27 +85,22 @@ void Game::ResizeCanvas(int w, int h)
 	graphics::setCanvasSize((float)canvaswidth, (float)canvasheight);
 }
 
-/////////////////////////////////////////////////////////////////////
-
-void Game::UpdateMainMenu()
+void Game::LoadLevel(int num)
 {
-	if (graphics::getKeyState(graphics::SCANCODE_SPACE))
+	if (level.Load(std::string("assets//Levels//Level") + std::to_string(num) + ".txt"))
 	{
-		if (level.Load(std::string("assets//Levels//Level1.txt")) == false)
-		{
-			return;
-		}
 		state = Game::State::PLAYSCREEN;
+		levelNumber = num;
+		showed = false;
+	}
+	else
+	{
+		levelNumber = 1;
+		state = Game::State::MAINMENU;
 	}
 }
 
-void Game::DrawMainMenu()
-{
-	graphics::Brush br;
-	br.outline_opacity = 0.0f;
-
-	graphics::drawText(canvaswidth / 2.0f - 250.0f, canvasheight / 2.0f, 50.0f, "Press  space  to  Start", br);
-}
+/////////////////////////////////////////////////////////////////////
 
 void Game::UpdatePlayScreen()
 {
@@ -98,11 +109,7 @@ void Game::UpdatePlayScreen()
 	switch (event)
 	{
 	case Event::PlayerWin:
-		levelNumber++;
-		if (level.Load(std::string("assets//Levels//Level") + std::to_string(levelNumber) + ".txt") == false)
-		{
-			state = Game::State::MAINMENU;
-		}
+		LoadLevel(levelNumber + 1);
 		break;
 	case Event::PlayerDies:
 		state = Game::State::MAINMENU;
@@ -127,9 +134,24 @@ void Game::DrawPlayScreen()
 	graphics::drawText(190.0f, 60.0f, 50.0f, std::to_string((int)level.GetPlayer()->GetHealth()), ui);
 	
 	// draw num of keys
-	graphics::drawText(10.0f, 120.0f, 50.0f, "Keys:", ui);
-	graphics::drawText(190.0f, 120.0f, 50.0f, std::to_string((int)level.GetNumOfkeys()), ui);
+	graphics::drawText(10.0f, 120.0f, 50.0f, "Keys  to  collect:", ui);
+	graphics::drawText(395.0f, 120.0f, 50.0f, std::to_string((int)level.GetNumOfkeys()), ui);
 
+	if (showed == false)
+	{
+		if (timePassed >= levelShowPeriod)
+		{
+			showed = true;
+			timePassed = 0;
+		}
+		else
+		{
+			// draw level
+			graphics::drawText(canvaswidth / 2.0f - 100.0f, canvasheight / 2.0f, 50.0f, "Level:", ui);
+			graphics::drawText(canvaswidth / 2.0f + 50.0f, canvasheight / 2.0f, 50.0f, std::to_string(levelNumber), ui);
+			timePassed += graphics::getDeltaTime();
+		}
+	}
 
 	// DEBUG
 	if (graphics::getKeyState(graphics::SCANCODE_M))
@@ -200,4 +222,56 @@ void Game::DrawPlayScreen()
 		graphics::drawText(canvaswidth - 80.0f, 50.0f, 50.0f, std::to_string(int(1.0 / frameTime)), fps);
 	}
 
+}
+
+void Game::ManageMenu(Menu& menu)
+{
+	if (graphics::getKeyState(graphics::SCANCODE_UP) && upArrowPress == false)
+	{
+		menu.SelectUp();
+		upArrowPress = true;
+	}
+	else
+	{
+		upArrowPress = graphics::getKeyState(graphics::SCANCODE_UP);
+	}
+
+	if (graphics::getKeyState(graphics::SCANCODE_DOWN) && downArrowPress == false)
+	{
+		menu.SelectDown();
+		downArrowPress = true;
+	}
+	else
+	{
+		downArrowPress = graphics::getKeyState(graphics::SCANCODE_DOWN);
+	}
+
+	if (graphics::getKeyState(graphics::SCANCODE_RETURN) && spaceEnder == false)
+	{
+		menu.Åxecute();
+		spaceEnder = true;
+	}
+	else
+	{
+		spaceEnder = graphics::getKeyState(graphics::SCANCODE_RETURN);
+	}
+}
+
+Game::Back::Back(Game::State& state)
+	:
+	state(state)
+{
+}
+
+void Game::Back::Do()
+{
+	switch (state)
+	{
+	case Game::State::MAINMENU:
+		state = Game::State::LEVELSELECTOR;
+		break;
+	case Game::State::LEVELSELECTOR:
+		state = Game::State::MAINMENU;
+		break;
+	}
 }
