@@ -1,0 +1,21 @@
+################################RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
+#                               RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
+#   p         p          p      RRRR            bb          bkRRRR
+#                               RRRR    l  k             l    RRRR
+#                               RRRRb              P          RRRR
+#                               RRRRbb        l               RRRR
+#    p        k          p      RRRR       k             l    RRRR
+#                               RRRRb                i        RRRR
+#                               RRRRRRRRRRRRpppppppRRRRRRRRRRRRRRR
+#    p        k          p      BBBB                          GGGG
+#                               BBBB   l                l     GGGG
+#                               BBBB                          GGGG
+#    p        k          p      BBBB                          GGGG
+#                               BBBB                          GGGG
+#                               BBBB   l                l     GGGG
+#    p        k          p      BBBB                          GGGG
+#                               BBBB           k              GGGG
+#                               bbbb                           bkG
+#    p   E    p    E     p      BBBB   l                l     GGGG
+#                               BBBB                          GGGG
+##################################################################
